@@ -37,7 +37,7 @@ export const PROJECTS_DATA: Project[] = [
     ],
     links: {
       live: "https://digitaltrainee.com",
-      github: "https://github.com/suhasborkar"
+      github: "https://github.com/Suhas-Borkar"
     }
   },
   {
@@ -63,7 +63,7 @@ export const PROJECTS_DATA: Project[] = [
     ],
     links: {
       live: "https://cryptokrantiacademy.com",
-      github: "https://github.com/suhasborkar"
+      github: "https://github.com/Suhas-Borkar"
     }
   },
   {
@@ -89,7 +89,7 @@ export const PROJECTS_DATA: Project[] = [
     ],
     links: {
       live: "https://digismartmanager.com",
-      github: "https://github.com/suhasborkar"
+      github: "https://github.com/Suhas-Borkar"
     }
   }
 ];
@@ -139,6 +139,12 @@ export const EXPERIENCE_DATA: Experience[] = [
 ];
 
 export const SOLUTIONS_DATA: Solution[] = [
+  {
+    title: "Custom Software Development",
+    description: "Bespoke, high-performance software systems engineered from the ground up to automate workflows and scale complex business models.",
+    iconName: "Code",
+    tags: ["SaaS", "Enterprise", "Automation"]
+  },
   {
     title: "Web Development",
     description: "Bespoke web applications built with the latest frameworks for speed, security, and responsive scale.",

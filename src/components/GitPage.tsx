@@ -58,7 +58,7 @@ interface CommitNode {
 
 export default function GitPage() {
   // GitHub search states
-  const [username, setUsername] = useState('suhasborkar');
+  const [username, setUsername] = useState('Suhas-Borkar');
   const [userProfile, setUserProfile] = useState<GitHubUser | null>(null);
   const [userRepos, setUserRepos] = useState<GitHubRepo[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -101,9 +101,9 @@ export default function GitPage() {
       console.error(err);
       setApiError(err.message || 'Failed to sync with GitHub API.');
       // Fallback fallback profile for demo if rate limited
-      if (queryUser.toLowerCase() === 'suhasborkar') {
+      if (queryUser.toLowerCase() === 'suhas-borkar' || queryUser.toLowerCase() === 'suhasborkar') {
         setUserProfile({
-          login: 'suhasborkar',
+          login: 'Suhas-Borkar',
           avatar_url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200',
           name: 'Suhas Borkar',
           bio: 'Full Stack Developer & Cloud Architect. Building highly scalable web apps.',
@@ -111,8 +111,8 @@ export default function GitPage() {
           followers: 180,
           following: 95,
           location: 'Pune, India',
-          html_url: 'https://github.com',
-          blog: 'suhasborkar.dev',
+          html_url: 'https://github.com/Suhas-Borkar',
+          blog: 'https://github.com/Suhas-Borkar',
           created_at: '2020-04-12T10:00:00Z'
         });
         setUserRepos([

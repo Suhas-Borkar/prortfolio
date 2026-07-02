@@ -74,11 +74,11 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
                 </div>
                 <div className="flex items-center gap-1.5">
                   <Globe size={12} className="text-brand-primary print:text-blue-800" />
-                  <span>github.com/suhasborkar</span>
+                  <span>https://github.com/Suhas-Borkar</span>
                 </div>
                 <div className="flex items-center gap-1.5 col-span-1 sm:col-span-2">
                   <Linkedin size={12} className="text-brand-primary print:text-blue-800" />
-                  <span>linkedin.com/in/suhas-borkar</span>
+                  <span>https://in.linkedin.com/in/suhas-borkar</span>
                 </div>
               </div>
             </div>

@@ -39,6 +39,7 @@ import CaseStudyModal from './components/CaseStudyModal';
 import ResumeModal from './components/ResumeModal';
 import ContactForm from './components/ContactForm';
 import GitPage from './components/GitPage';
+import ProjectsPage from './components/ProjectsPage';
 
 export default function App() {
   // Mobile navigation drawer
@@ -50,8 +51,8 @@ export default function App() {
   // Resume modal state
   const [resumeOpen, setResumeOpen] = useState(false);
 
-  // Selected tab/page ('portfolio' | 'git')
-  const [currentTab, setCurrentTab] = useState<'portfolio' | 'git'>('portfolio');
+  // Selected tab/page ('portfolio' | 'git' | 'projects')
+  const [currentTab, setCurrentTab] = useState<'portfolio' | 'git' | 'projects'>('portfolio');
 
   // Skill category filter state
   const [activeSkillFilter, setActiveSkillFilter] = useState<'All' | 'Frontend' | 'Backend' | 'Database' | 'Tools'>('All');
@@ -129,6 +130,7 @@ export default function App() {
   // Map icons dynamically
   const getSolutionIcon = (name: string) => {
     switch (name) {
+      case 'Code': return <Code2 className="text-brand-primary" size={28} />;
       case 'Monitor': return <Monitor className="text-brand-primary" size={28} />;
       case 'Settings': return <Server className="text-brand-tertiary" size={28} />;
       case 'Zap': return <Zap className="text-brand-error" size={28} />;
@@ -230,6 +232,13 @@ export default function App() {
             >
               Git Engine
             </button>
+            <button 
+              id="nav-projects-btn"
+              onClick={() => { setCurrentTab('projects'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className={`transition-colors text-sm font-medium tracking-wide cursor-pointer ${currentTab === 'projects' ? 'text-brand-primary font-bold' : 'text-brand-on-surface-variant hover:text-brand-primary'}`}
+            >
+              Live Sandbox
+            </button>
             
             <button 
               id="nav-talk-btn"
@@ -292,6 +301,13 @@ export default function App() {
               Git Engine
             </button>
             <button 
+              id="mob-nav-projects-btn"
+              onClick={() => { setMobileMenuOpen(false); setCurrentTab('projects'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className={`text-left py-2 text-base font-semibold border-b border-white/5 ${currentTab === 'projects' ? 'text-brand-primary' : 'text-brand-on-surface hover:text-brand-primary'}`}
+            >
+              Live Sandbox
+            </button>
+            <button 
               id="mob-nav-talk-btn"
               onClick={() => handleScrollTo('contact')}
               className="btn-primary w-full py-3 rounded-xl text-center text-white font-bold text-sm mt-2 shadow-lg"
@@ -316,6 +332,17 @@ export default function App() {
               className="max-w-7xl mx-auto px-6 py-12"
             >
               <GitPage />
+            </motion.div>
+          ) : currentTab === 'projects' ? (
+            <motion.div 
+              key="projects"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3 }}
+              className="max-w-7xl mx-auto px-6 py-12"
+            >
+              <ProjectsPage />
             </motion.div>
           ) : (
             <motion.div
