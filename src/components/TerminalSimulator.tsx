@@ -28,7 +28,7 @@ export default function TerminalSimulator() {
     const code = `const Developer = {
   name: "Suhas Borkar",
   role: "Full Stack",
-  skills: ["React", "Node", "TypeScript", "Next.js"],
+  skills: ["Angular", "Next.js", "PHP", "Docker", "AWS"],
   passion: "Clean Code & Digital Craftsmanship",
   coffee: Infinity,
   availableForHire: true
@@ -69,7 +69,7 @@ export default function TerminalSimulator() {
           `Name: ${HERO_DATA.name}`,
           `Role: ${HERO_DATA.title}`,
           `Bio: ${HERO_DATA.description}`,
-          "Experience: 4+ Years of engineering responsive products."
+          "Experience: 2.7+ Years of engineering responsive products."
         ];
         break;
       case 'skills':
@@ -179,8 +179,8 @@ export default function TerminalSimulator() {
           <pre className="text-brand-primary leading-relaxed">
             <span className="text-brand-tertiary">const</span> <span className="text-brand-primary">Developer</span> = {'{'}
             {"\n  "}name: <span className="text-brand-tertiary">"Suhas Borkar"</span>,
-            {"\n  "}role: <span className="text-brand-tertiary">"Full Stack Architect"</span>,
-            {"\n  "}skills: [<span className="text-brand-tertiary">"React"</span>, <span className="text-brand-tertiary">"Node"</span>, <span className="text-brand-tertiary">"TypeScript"</span>, <span className="text-brand-tertiary">"Next"</span>],
+            {"\n  "}role: <span className="text-brand-tertiary">"Full Stack Developer"</span>,
+            {"\n  "}skills: [<span className="text-brand-tertiary">"Angular"</span>, <span className="text-brand-tertiary">"Next.js"</span>, <span className="text-brand-tertiary">"PHP"</span>, <span className="text-brand-tertiary">"Docker"</span>, <span className="text-brand-tertiary">"AWS"</span>],
             {"\n  "}passion: <span className="text-brand-tertiary">"Clean Code &amp; Visual UX"</span>,
             {"\n  "}coffee: <span className="text-brand-tertiary">Infinity</span>,
             {"\n  "}availability: <span className="text-brand-tertiary">"Open for exciting projects"</span>

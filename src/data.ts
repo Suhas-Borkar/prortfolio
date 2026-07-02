@@ -2,133 +2,138 @@ import { Project, Skill, Experience, Solution } from './types';
 
 export const HERO_DATA = {
   name: "Suhas Borkar",
-  title: "Full Stack Developer & Digital Architect",
+  title: "Full Stack Developer",
   badgeText: "Available for Work",
-  description: "I build high-performance web applications with React, Node.js, and modern cloud architectures. Transforming complex problems into elegant digital experiences through technical precision and modern design.",
+  description: "Full Stack Developer with 2.7+ years of experience delivering 22+ production applications across EdTech, FinTech, Real Estate, and Healthcare. Proficient in Angular, PHP/CodeIgniter, Python, AWS, and Docker.",
   stats: [
-    { label: "Years Experience", value: "4+" },
-    { label: "Projects Delivered", value: "20+" },
-    { label: "Tech Stacks", value: "10+" },
+    { label: "Years Experience", value: "2.7+" },
+    { label: "Projects Delivered", value: "22" },
+    { label: "Client Portfolios", value: "22" },
     { label: "Commitment", value: "100%" }
   ]
 };
 
 export const PROJECTS_DATA: Project[] = [
   {
-    id: "bi-dashboard",
-    title: "Business Intelligence Dashboard",
-    description: "Real-time data visualization platform for enterprise logistics management.",
-    longDescription: "A comprehensive high-end business dashboard system built for monitoring global supply chain operations. It leverages dynamic microservices to query data streams, processes high-frequency telemetry, and displays sub-second visual updates for complex route logistics.",
+    id: "digitaltrainee-ecosystem",
+    title: "DigitalTrainee Ecosystem",
+    description: "Integrated platform consisting of CRM, LMS, student & trainer dashboards.",
+    longDescription: "A massive, multi-portal education management ecosystem crafted for the DigitalTrainee platform, consisting of CRM, LMS, and separate interactive dashboards for students and trainers. Architected to support over 1,000 active users with real-time analytics.",
     image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDcRg2SDI-q9VZwHFGB32dL3tuHrjaTK6-MgUMgFVlYK4E3lIXdq3S4P6CjY6s2wKqYuRh071nONLQu4-dTn_MlizxuRq9hXq7ob0PRkDTnAgmVWDQQb5SxKqFIYsaotl_gqlNALfgXkzC8IrtVN00ZED6CxbSXlHeCM_7vGY7iu2QliQ8LM7Xqje1KZrYvPkOJFXC-ECslR4b9nmKc0d27iVjyVJMkjyzgec-Bb_3Uw5TtHopUDAIuLRLbYUTY_jy_iME-x4RlMbs",
-    tags: ["Next.js", "Chart.js", "TypeScript", "D3.js", "Tailwind"],
-    category: "Frontend & Analytics",
+    tags: ["Angular", "CodeIgniter 3", "MySQL", "AWS EC2", "RxJS"],
+    category: "Full Stack & EdTech",
     stats: [
-      { label: "Active Operations", value: "1,200/min" },
-      { label: "Data Latency", value: "< 150ms" },
-      { label: "Client Render Time", value: "12ms" }
+      { label: "Active Users", value: "1,000+" },
+      { label: "Portals Integrated", value: "4" },
+      { label: "Infrastructure Uptime", value: "99.9%" }
     ],
     challenges: [
-      "Rendering thousands of live plotting points on SVG-based charts caused critical browser frame dropouts.",
-      "Parsing real-time JSON web socket streams led to main-thread congestion."
+      "Managing real-time synchronization of student and trainer activity logs across independent database instances.",
+      "Overcoming slow page load speeds on heavy data tables containing student academic records."
     ],
     solutions: [
-      "Optimized rendering pipeline using canvas-based layered graphs combined with RequestAnimationFrame rendering loops.",
-      "Offloaded stream ingestion, compression, and mathematical calculations to Web Workers to ensure a 60fps interaction experience."
+      "Created centralized RESTful PHP/CodeIgniter API backends combined with shared JWT authentication tokens.",
+      "Implemented Angular lazy loading and RxJS state management to streamline data streams and optimize DOM render speeds."
     ],
     links: {
-      live: "https://example.com/demo-bi",
-      github: "https://github.com/suhasborkar/bi-dashboard"
+      live: "https://digitaltrainee.com",
+      github: "https://github.com/suhasborkar"
     }
   },
   {
-    id: "nexus-ecommerce",
-    title: "Nexus E-Commerce",
-    description: "A headless commerce solution with ultra-fast checkout and product discovery.",
-    longDescription: "A state-of-the-art e-commerce engine designed for high-end luxury products. Built on a modular headless framework, it incorporates serverless API integrations, lightning-quick pagination, layered elastic filters, and secure international gateways via Stripe Elements.",
+    id: "cryptokranti-academy",
+    title: "CryptoKranti Academy",
+    description: "Dual-domain educational platform with automated webinar scheduling & payment gateways.",
+    longDescription: "A specialized financial educational portal that delivers live courses, webinars, and automated registration. Integrates robust transaction processing to manage premium webinar seats and course progress tracking.",
     image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCgYdQswv8z71U7sflQCQhP3NNlrLTMBd3ED-cogVv7H2TFvfB1CbTtAJiVELVYI51D7ggBnqLz0Uo9BOyoDvDYLnDeAh0XCpMwpSzxrw5ojBebKO14zrvWPjsXdLMO0yaFdCQxtdPqBew_QoYOT_VYSO5uifaD_xA2PjIzex-DdyZFirx3eGyNG-Cj7lGcFkV6Ge25bdakgl54p_i41ua31wuYuAxOVfGJG-x8FFoRofWTlcG612hh_bdmLVZoDaLjoabKPF19zuE",
-    tags: ["React", "Stripe", "Node.js", "MongoDB", "Express"],
-    category: "Full Stack",
+    tags: ["Angular", "PHP", "PostgreSQL", "JWT", "REST API"],
+    category: "Web Application",
     stats: [
-      { label: "Checkout Conversion", value: "+24%" },
-      { label: "Page Load (LCP)", value: "0.8s" },
-      { label: "API Response Time", value: "45ms" }
+      { label: "Platform Model", value: "Dual-Domain" },
+      { label: "Database", value: "PostgreSQL" },
+      { label: "Security Status", value: "JWT-Secured" }
     ],
     challenges: [
-      "Slow faceted search filters delayed product discovery and directly hurt customer retention.",
-      "Race conditions occurred during sudden high-velocity stock updates during holiday events."
+      "Securing private, high-value webinar content from unauthorized scraping and session sharing.",
+      "Synchronizing payment status hooks back to the platform without dropping user sessions."
     ],
     solutions: [
-      "Implemented server-side Elasticsearch index replication paired with Redis in-memory cache clustering.",
-      "Designed a robust atomic inventory decrement protocol in MongoDB with retry mechanics to prevent overselling."
+      "Engineered multi-layered JWT session authentication coupled with short-lived session security rules.",
+      "Built robust asynchronous webhook listeners with failover queues in PostgreSQL to handle payment completions securely."
     ],
     links: {
-      live: "https://example.com/demo-nexus",
-      github: "https://github.com/suhasborkar/nexus-ecommerce"
+      live: "https://cryptokrantiacademy.com",
+      github: "https://github.com/suhasborkar"
     }
   },
   {
-    id: "project-sync",
-    title: "Project Sync Tool",
-    description: "Collaborative workspace for agile teams with real-time updates.",
-    longDescription: "A productivity and workspace planner incorporating a real-time collaborative white-board, Kanban board, and automated sprint metrics. Designed for fast-paced modern engineering units requiring seamless team synchronization.",
+    id: "digismart-manager",
+    title: "DigiSmart Manager",
+    description: "High-performance SaaS CRM fully containerized with automated CI/CD.",
+    longDescription: "A comprehensive SaaS CRM application designed to assist agencies in handling lead funnels, customer relations, and business analytics. The system features custom dashboard metrics and a fully automated deployment cycle.",
     image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDqib0S1JGNfUDwzAstq0VaaFaPISqZQ2b4jQE-_iDes_G5v_kzlSOmxAzXrfwAQLj8lFXEBMOfyKbOWxIkOl1aDrvahrpTXLS0ET6kUL3F88x9_IeQZXAwiGPxBYlNzLAb5X2EKQ0PxW_710O_aRTC3Kjo1djB3PqVf7dgA6r0IAUX0bhNqrxGzdvyUM1gJWzfVasBAnvLZU5-XOmhiFXQUCOHO8vXEsxL5qL44rqm61urIHM7pGWIkKYux6aaQqyNp4Ve-kUM3ww",
-    tags: ["Firebase", "Tailwind", "React", "WebSockets", "Vite"],
-    category: "Productivity",
+    tags: ["Angular", "PHP", "Docker", "GitHub Actions", "CI/CD"],
+    category: "SaaS & DevOps",
     stats: [
-      { label: "Active Collaboration", value: "250+ users" },
-      { label: "Sync Latency", value: "< 50ms" },
-      { label: "Weekly Active Teams", value: "800+" }
+      { label: "Manual Effort Reduction", value: "~70%" },
+      { label: "Deployment Speed", value: "< 3 mins" },
+      { label: "Platform Type", value: "SaaS CRM" }
     ],
     challenges: [
-      "Resolving concurrent modifications to single task cards when multiple users edited descriptions simultaneously.",
-      "Real-time visual flickering during aggressive socket-driven updates."
+      "Resolving environment inconsistency across staging and production server setups.",
+      "Manual testing and deployment took upwards of an hour per feature release, delaying updates."
     ],
     solutions: [
-      "Engineered a lightweight Operational Transformation (OT) conflict resolution algorithm on the client side.",
-      "Utilized optimized state batching combined with structural shallow comparisons to completely eliminate UI flickering."
+      "Completely containerized the Angular frontend and PHP backend using multi-stage Docker builds.",
+      "Automated unit tests and production building using custom GitHub Actions workflows, deploying directly to secure environments."
     ],
     links: {
-      live: "https://example.com/demo-sync",
-      github: "https://github.com/suhasborkar/project-sync"
+      live: "https://digismartmanager.com",
+      github: "https://github.com/suhasborkar"
     }
   }
 ];
 
 export const SKILLS_DATA: Skill[] = [
   // Frontend
-  { name: "React.js", level: 95, category: "Frontend", icon: "Code2" },
-  { name: "Next.js", level: 90, category: "Frontend", icon: "Layers" },
+  { name: "Angular", level: 95, category: "Frontend", icon: "Code2" },
+  { name: "Next.js", level: 88, category: "Frontend", icon: "Layers" },
+  { name: "RxJS", level: 90, category: "Frontend", icon: "Layers" },
   { name: "TypeScript", level: 92, category: "Frontend", icon: "ShieldAlert" },
-  { name: "Tailwind CSS", level: 96, category: "Frontend", icon: "Paintbrush" },
+  { name: "JavaScript (ES6+)", level: 95, category: "Frontend", icon: "Paintbrush" },
+  { name: "HTML5 & CSS3", level: 96, category: "Frontend", icon: "Paintbrush" },
+  { name: "Angular Material", level: 90, category: "Frontend", icon: "Layers" },
+  { name: "jQuery", level: 85, category: "Frontend", icon: "Code2" },
   // Backend
-  { name: "Node.js", level: 88, category: "Backend", icon: "Terminal" },
-  { name: "Express", level: 90, category: "Backend", icon: "Server" },
-  { name: "Python", level: 80, category: "Backend", icon: "Cpu" },
-  { name: "GraphQL", level: 82, category: "Backend", icon: "GitBranch" },
+  { name: "PHP", level: 93, category: "Backend", icon: "Terminal" },
+  { name: "CodeIgniter 3", level: 95, category: "Backend", icon: "Server" },
+  { name: "Python", level: 82, category: "Backend", icon: "Cpu" },
+  { name: "Django", level: 80, category: "Backend", icon: "GitBranch" },
+  { name: "FastAPI", level: 85, category: "Backend", icon: "Cpu" },
+  { name: "REST API Design", level: 94, category: "Backend", icon: "Terminal" },
   // Database
-  { name: "MongoDB", level: 85, category: "Database", icon: "Database" },
+  { name: "MySQL", level: 92, category: "Database", icon: "Database" },
   { name: "PostgreSQL", level: 88, category: "Database", icon: "Layers" },
-  { name: "Redis", level: 80, category: "Database", icon: "Activity" },
-  { name: "Firebase", level: 90, category: "Database", icon: "CloudLightning" },
   // Tools
-  { name: "Docker", level: 82, category: "Tools", icon: "Container" },
-  { name: "AWS", level: 84, category: "Tools", icon: "Cloud" },
-  { name: "Git & GitHub", level: 95, category: "Tools", icon: "GitCommit" },
-  { name: "CI/CD Pipelines", level: 85, category: "Tools", icon: "Zap" }
+  { name: "Docker", level: 88, category: "Tools", icon: "Container" },
+  { name: "AWS (EC2/S3)", level: 86, category: "Tools", icon: "Cloud" },
+  { name: "GitHub Actions", level: 90, category: "Tools", icon: "Zap" },
+  { name: "Git & GitHub", level: 95, category: "Tools", icon: "GitCommit" }
 ];
 
 export const EXPERIENCE_DATA: Experience[] = [
   {
     role: "Full Stack Developer",
-    company: "DigitizeBrand Hub (India) Pvt Ltd",
+    company: "Digitize Brand Pvt. Ltd.",
     location: "Pune, India",
-    period: "2020 — Present",
-    description: "Leading the development of scalable web applications using the MERN stack. Orchestrated high-traffic business dashboards and e-commerce solutions, optimizing performance by 40% through advanced caching strategies and frontend refactoring.",
+    period: "June 2023 — Present",
+    description: "Delivered 22 production websites across EdTech, FinTech, Real Estate, Healthcare, and Hospitality as the sole developer on most projects. Built and maintained 4 integrated portals serving 1,000+ active users.",
     bullets: [
-      "Architected modular microservices architecture using Node.js and AWS, reducing operational server costs by 22%.",
-      "Mentored a team of 5 junior developers on best practices, clean testing strategies, and strict TypeScript code standards.",
-      "Authored custom high-efficiency internal reusable component libraries using React, Tailwind CSS, and Framer Motion.",
-      "Integrated secure multi-currency billing and checkout operations processing $12k+ in weekly transactions with near-zero error ratios."
+      "Delivered 22 production websites across multiple domains as the sole developer on most projects.",
+      "Architected Angular SPAs with RESTful PHP/CodeIgniter backends; implemented lazy loading and RxJS optimization for improved page load performance.",
+      "Automated deployment pipelines using GitHub Actions + Docker, reducing manual deployment effort by ~70%.",
+      "Managed cloud infrastructure on AWS EC2 with S3 for static assets, maintaining 99%+ uptime across all client projects.",
+      "Owned full SDLC: requirement gathering, sprint planning, REST API design, JWT authentication, and post-launch support."
     ]
   }
 ];

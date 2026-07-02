@@ -54,7 +54,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
                   Suhas Borkar
                 </h1>
                 <p className="text-brand-primary text-base sm:text-lg font-medium mt-1 print:text-blue-800">
-                  Full Stack Developer &amp; Digital Architect
+                  Full Stack Developer
                 </p>
               </div>
               
@@ -70,15 +70,15 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
                 </div>
                 <div className="flex items-center gap-1.5">
                   <MapPin size={12} className="text-brand-primary print:text-blue-800" />
-                  <span>India (GMT +5:30)</span>
+                  <span>Pune, Maharashtra</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <Globe size={12} className="text-brand-primary print:text-blue-800" />
-                  <span>suhasborkar.dev</span>
+                  <span>github.com/suhasborkar</span>
                 </div>
                 <div className="flex items-center gap-1.5 col-span-1 sm:col-span-2">
                   <Linkedin size={12} className="text-brand-primary print:text-blue-800" />
-                  <span>linkedin.com/in/suhasborkar</span>
+                  <span>linkedin.com/in/suhas-borkar</span>
                 </div>
               </div>
             </div>
@@ -90,7 +90,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
               Executive Summary
             </h2>
             <p className="text-sm text-brand-on-surface-variant leading-relaxed print:text-gray-800">
-              Passionate, detail-oriented Full Stack Developer with 4+ years of professional experience building high-performance web applications using React, Node.js, and modern cloud infrastructures. Proven track record of architecting scalable microservices, optimizing data pipelines, and implementing high-fidelity visual interfaces that translate customer requirements into business success.
+              Full Stack Developer with 2.7+ years of experience delivering 22+ production applications across EdTech, FinTech, Real Estate, and Healthcare. Proficient in Angular, PHP/CodeIgniter, Python, AWS, and Docker. Experienced in REST API design, CI/CD automation (GitHub Actions), and cloud infrastructure management. Proven solo-developer track record with end-to-end ownership — from requirement gathering to post-launch support.
             </p>
           </div>
 
@@ -108,21 +108,23 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
                       Full Stack Developer
                     </h3>
                     <p className="text-xs sm:text-sm font-medium text-brand-secondary/95 print:text-gray-800">
-                      DigitizeBrand Hub (India) Pvt Ltd
+                      Digitize Brand Pvt. Ltd.
                     </p>
                   </div>
                   <span className="text-xs text-brand-on-surface-variant/80 font-mono print:text-gray-600 bg-brand-surface-container/40 px-2 py-0.5 rounded border border-white/5 print:border-0 print:bg-transparent">
-                    2020 — Present
+                    June 2023 — Present
                   </span>
                 </div>
                 <p className="text-xs sm:text-sm text-brand-on-surface-variant/90 italic mb-3 print:text-gray-700">
-                  Lead MERN stack engineer directing visual, database, and logic workflows for high-frequency client applications.
+                  Delivered 22 production websites across EdTech, FinTech, Real Estate, Healthcare, and Hospitality as sole developer on most projects.
                 </p>
                 <ul className="space-y-1.5 text-xs sm:text-sm text-brand-on-surface-variant list-disc pl-4 print:text-gray-800">
-                  <li>Architected modular microservices architecture using Node.js, Express, and Amazon Web Services, resolving performance dropouts and cutting server operational costs by 22%.</li>
-                  <li>Spearheaded performance tuning and progressive web app configurations for high-traffic business dashboards, optimizing rendering metrics by 40%.</li>
-                  <li>Mentored a fast-growing team of 5 junior developers, establishing clean code patterns, rigorous code reviews, and robust TypeScript practices.</li>
-                  <li>Implemented real-time transaction processing networks via Stripe, securing flawless conversion funnels for global audiences.</li>
+                  <li>Delivered 22 production websites across multiple domains as the sole developer on most projects.</li>
+                  <li>Built and maintained 4 integrated portals (CRM, LMS, Student & Trainer dashboards) under the DigitalTrainee platform, serving 1,000+ active users.</li>
+                  <li>Architected Angular SPAs with RESTful PHP/CodeIgniter backends; implemented lazy loading and RxJS optimization for improved page load performance.</li>
+                  <li>Automated deployment pipelines using GitHub Actions + Docker, reducing manual deployment effort by ~70%.</li>
+                  <li>Managed cloud infrastructure on AWS EC2 with S3 for static assets, maintaining 99%+ uptime across all client projects.</li>
+                  <li>Owned full SDLC: requirement gathering, sprint planning, REST API design, JWT authentication, and post-launch support.</li>
                 </ul>
               </div>
             </div>
@@ -136,19 +138,19 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
               <div>
                 <h4 className="text-xs font-bold text-brand-tertiary uppercase print:text-purple-800">Frontend</h4>
-                <p className="text-xs text-brand-on-surface-variant mt-1 print:text-gray-800">React.js, Next.js, TypeScript, Tailwind CSS, Redux Toolkit, Framer Motion, HTML5, ES6+</p>
+                <p className="text-xs text-brand-on-surface-variant mt-1 print:text-gray-800">Angular, Next.js, Angular Material, RxJS, TypeScript, JavaScript (ES6+), HTML5, CSS3, jQuery</p>
               </div>
               <div>
                 <h4 className="text-xs font-bold text-brand-tertiary uppercase print:text-purple-800">Backend</h4>
-                <p className="text-xs text-brand-on-surface-variant mt-1 print:text-gray-800">Node.js, Express, Python, GraphQL, REST APIs, Microservices, WebSockets, Socket.io</p>
+                <p className="text-xs text-brand-on-surface-variant mt-1 print:text-gray-800">PHP, CodeIgniter 3, Python, Django, FastAPI, REST API Design, JWT Authentication, AJAX, JSON</p>
               </div>
               <div>
                 <h4 className="text-xs font-bold text-brand-tertiary uppercase print:text-purple-800">Databases</h4>
-                <p className="text-xs text-brand-on-surface-variant mt-1 print:text-gray-800">MongoDB, PostgreSQL, Redis, Firebase Firestore, Firebase Authentication</p>
+                <p className="text-xs text-brand-on-surface-variant mt-1 print:text-gray-800">MySQL, PostgreSQL</p>
               </div>
               <div>
                 <h4 className="text-xs font-bold text-brand-tertiary uppercase print:text-purple-800">Cloud &amp; Tools</h4>
-                <p className="text-xs text-brand-on-surface-variant mt-1 print:text-gray-800">Docker, AWS, Git, CI/CD pipelines, Vercel, Google Cloud, Webpack, Vite</p>
+                <p className="text-xs text-brand-on-surface-variant mt-1 print:text-gray-800">Docker, Docker Hub, AWS EC2, AWS S3, GitHub Actions, CI/CD Pipelines, Git, GitHub, Postman, VS Code</p>
               </div>
             </div>
           </div>
@@ -160,19 +162,19 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
                 Education
               </h3>
               <div>
-                <h4 className="text-xs sm:text-sm font-bold text-white print:text-black">Bachelor of Science in Computer Science</h4>
-                <p className="text-xs text-brand-on-surface-variant print:text-gray-700">Pune University, India • Graduated First Class</p>
+                <h4 className="text-xs sm:text-sm font-bold text-white print:text-black">Bachelor of Commerce (B.Com)</h4>
+                <p className="text-xs text-brand-on-surface-variant print:text-gray-700">Savitribai Phule Pune University • Graduated 2022 • CGPA 7.6 / 10</p>
               </div>
             </div>
             
             <div className="space-y-2">
               <h3 className="text-xs font-display font-bold uppercase tracking-widest text-brand-primary print:text-blue-800 border-b border-white/5 pb-1 print:border-black/5">
-                Key Accomplishments
+                Certifications &amp; Learning
               </h3>
               <ul className="list-disc pl-4 text-xs text-brand-on-surface-variant space-y-1 print:text-gray-800">
-                <li>AWS Certified Solutions Architect Associate.</li>
-                <li>Created custom open-source React dashboard elements with 500+ GitHub stars.</li>
-                <li>Delivered 20+ enterprise-grade projects with 100% client satisfaction scores.</li>
+                <li>AWS Certified Cloud Practitioner — In Progress / Planned</li>
+                <li>Docker Fundamentals (Docker Inc.) — In Progress / Planned</li>
+                <li>Angular Advanced Concepts — In Progress / Planned</li>
               </ul>
             </div>
           </div>
