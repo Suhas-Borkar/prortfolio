@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Grotesk:wght@300..700&family=Fira+Code:wght@300..700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "Fira Code", monospace;
+
+  /* Lumina Developer Design System Colors */
+  --color-brand-bg: #030712;
+  --color-brand-surface: #10131a;
+  --color-brand-surface-dim: #10131a;
+  --color-brand-surface-bright: #363941;
+  --color-brand-surface-container-lowest: #0b0e15;
+  --color-brand-surface-container-low: #191b23;
+  --color-brand-surface-container: #1d2027;
+  --color-brand-surface-container-high: #272a31;
+  --color-brand-surface-container-highest: #32353c;
+  --color-brand-on-surface: #e1e2ec;
+  --color-brand-on-surface-variant: #c2c6d6;
+  --color-brand-outline: #8c909f;
+  --color-brand-outline-variant: #424754;
+  --color-brand-primary: #adc6ff;
+  --color-brand-on-primary: #002e6a;
+  --color-brand-primary-container: #4d8eff;
+  --color-brand-on-primary-container: #00285d;
+  --color-brand-secondary: #c0c6db;
+  --color-brand-tertiary: #d0bcff;
+  --color-brand-tertiary-container: #a078ff;
+  --color-brand-error: #ffb4ab;
+  --color-brand-error-container: #93000a;
+}
+
+body {
+  background-color: var(--color-brand-bg);
+  color: var(--color-brand-on-surface);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-brand-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-brand-surface-container-high);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-outline-variant);
+}
+
+.glass-card {
+  background: rgba(17, 24, 39, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(248, 250, 252, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(173, 198, 255, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px -10px rgba(173, 198, 255, 0.2);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #adc6ff, #d0bcff, #4d8eff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #005ac2, #a078ff, #4d8eff);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 20px rgba(173, 198, 255, 0.4);
+  transform: scale(1.02);
+}
+
+@keyframes scroll-infinite {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-scroll {
+  animation: scroll-infinite 30s linear infinite;
+}
+
+/* Custom glow effects */
+.glow-accent {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: -1;
+  pointer-events: none;
+}
