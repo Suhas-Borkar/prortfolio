@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { 
   Code2, 
   Layers, 
@@ -304,18 +305,37 @@ export default function App() {
       {/* Main Container spacing for fixed nav */}
       <main className="relative z-10 pt-20">
 
-        {currentTab === 'git' ? (
-          <div className="max-w-7xl mx-auto px-6 py-12">
-            <GitPage />
-          </div>
-        ) : (
-          <>
-            {/* Hero Section */}
-            <section id="hero" className="min-h-[calc(100vh-80px)] flex items-center px-6 max-w-7xl mx-auto py-12 relative overflow-hidden">
-          <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
-            
-            {/* Hero details */}
-            <div className="space-y-6 animate-fade-in">
+        <AnimatePresence mode="wait">
+          {currentTab === 'git' ? (
+            <motion.div 
+              key="git"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3 }}
+              className="max-w-7xl mx-auto px-6 py-12"
+            >
+              <GitPage />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="portfolio"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              {/* Hero Section */}
+              <section id="hero" className="min-h-[calc(100vh-80px)] flex items-center px-6 max-w-7xl mx-auto py-12 relative overflow-hidden">
+            <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
+              
+              {/* Hero details */}
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="space-y-6"
+              >
               {/* Hiring Badge */}
               <div className="inline-flex items-center gap-2 bg-brand-primary-container/10 border border-brand-primary/20 px-4 py-1.5 rounded-full">
                 <span className="relative flex h-2 w-2">
@@ -357,12 +377,17 @@ export default function App() {
                   <FileText size={16} /> Interactive CV
                 </button>
               </div>
-            </div>
+            </motion.div>
 
             {/* Editor Terminal widget */}
-            <div className="w-full">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="w-full"
+            >
               <TerminalSimulator />
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -370,8 +395,12 @@ export default function App() {
         <section id="stats" className="py-12 px-6 max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
             {HERO_DATA.stats.map((stat, idx) => (
-              <div 
+              <motion.div 
                 key={idx} 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
                 className="glass-card p-6 rounded-2xl text-center border border-white/5 relative group overflow-hidden"
               >
                 {/* Micro particle background glow */}
@@ -382,14 +411,20 @@ export default function App() {
                 <div className="text-xs sm:text-sm text-brand-on-surface-variant/80 font-medium font-sans">
                   {stat.label}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </section>
 
         {/* Technical Arsenal (Skills Matrix) Section */}
         <section id="skills" className="py-20 px-6 max-w-7xl mx-auto scroll-mt-20">
-          <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+            className="text-center max-w-3xl mx-auto mb-12 space-y-4"
+          >
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-white tracking-tight">
               Technical <span className="gradient-text">Arsenal</span>
             </h2>
@@ -414,13 +449,18 @@ export default function App() {
                 </button>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Skills Grid */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             {filteredSkills.map((skill, idx) => (
-              <div 
-                key={idx} 
+              <motion.div 
+                layout
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.3, delay: Math.min(idx * 0.05, 0.4) }}
+                key={skill.name} 
                 className="glass-card p-5 rounded-2xl border border-white/5 hover:border-brand-primary/30 flex flex-col justify-between group"
               >
                 <div className="flex items-center gap-3 mb-4">
@@ -443,7 +483,7 @@ export default function App() {
                     />
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </section>
@@ -462,7 +502,14 @@ export default function App() {
 
             <div className="relative pl-6 sm:pl-8 border-l border-white/10 space-y-12">
               {EXPERIENCE_DATA.map((exp, idx) => (
-                <div key={idx} className="relative group">
+                <motion.div 
+                  key={idx} 
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6, delay: idx * 0.15 }}
+                  className="relative group"
+                >
                   {/* Glowing Indicator Dot */}
                   <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-brand-bg border-4 border-brand-primary ring-4 ring-brand-primary/10 group-hover:scale-125 group-hover:border-brand-tertiary transition-all duration-300"></div>
                   
@@ -498,7 +545,7 @@ export default function App() {
                       </ul>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -506,19 +553,29 @@ export default function App() {
 
         {/* Featured Creations (Portfolio Projects) Section */}
         <section id="work" className="py-20 px-6 max-w-7xl mx-auto scroll-mt-20">
-          <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+            className="text-center max-w-3xl mx-auto mb-14 space-y-4"
+          >
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-white tracking-tight">
               Featured <span className="gradient-text">Creations</span>
             </h2>
             <p className="text-sm sm:text-base text-brand-on-surface-variant">
               An inspection into recent systems and high-end digital solutions designed to optimize commercial value.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {PROJECTS_DATA.map((project) => (
-              <div 
+            {PROJECTS_DATA.map((project, idx) => (
+              <motion.div 
                 key={project.id} 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: idx * 0.1 }}
                 className="glass-card rounded-2xl overflow-hidden group border border-white/5 flex flex-col justify-between"
               >
                 <div>
@@ -566,26 +623,36 @@ export default function App() {
                     <ArrowRight size={14} className="group-hover/link:translate-x-1.5 transition-transform" />
                   </button>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </section>
 
         {/* Comprehensive Solutions Section */}
         <section id="services" className="py-20 px-6 max-w-7xl mx-auto scroll-mt-20">
-          <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+            className="text-center max-w-3xl mx-auto mb-14 space-y-4"
+          >
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-white tracking-tight">
               Comprehensive <span className="gradient-text">Solutions</span>
             </h2>
             <p className="text-sm sm:text-base text-brand-on-surface-variant">
               Professional full-cycle engineering services delivered with maximum velocity, strict security, and visual excellence.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {SOLUTIONS_DATA.map((solution, idx) => (
-              <div 
+              <motion.div 
                 key={idx} 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: idx * 0.1 }}
                 className="glass-card p-6 sm:p-8 rounded-2xl border border-white/5 hover:border-white/10 flex flex-col justify-between group"
               >
                 <div className="space-y-4">
@@ -611,7 +678,7 @@ export default function App() {
                     </span>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </section>
@@ -651,11 +718,19 @@ export default function App() {
         </section>
 
             {/* Interactive Contact & Inquiries Panel */}
-            <section id="contact" className="py-24 px-6 max-w-7xl mx-auto scroll-mt-20">
+            <motion.section 
+              id="contact" 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6 }}
+              className="py-24 px-6 max-w-7xl mx-auto scroll-mt-20"
+            >
               <ContactForm />
-            </section>
-          </>
-        )}
+            </motion.section>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
       </main>
 
