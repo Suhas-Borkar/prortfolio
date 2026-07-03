@@ -35,7 +35,7 @@ import {
   FolderOpen
 } from 'lucide-react';
 
-import { HERO_DATA, PROJECTS_DATA, SKILLS_DATA, EXPERIENCE_DATA, SOLUTIONS_DATA } from './data';
+import { HERO_DATA, PROJECTS_DATA, SKILLS_DATA, EXPERIENCE_DATA, SOLUTIONS_DATA, FAQ_DATA } from './data';
 import { Project, Skill } from './types';
 import TerminalSimulator from './components/TerminalSimulator';
 import CaseStudyModal from './components/CaseStudyModal';
@@ -44,6 +44,7 @@ import ContactForm from './components/ContactForm';
 import GitPage from './components/GitPage';
 import ProjectsPage from './components/ProjectsPage';
 import EnquiryModal from './components/EnquiryModal';
+import FAQSection from './components/FAQSection';
 
 export default function App() {
   // Mobile navigation drawer
@@ -315,6 +316,13 @@ export default function App() {
               Services
             </button>
             <button 
+              id="nav-faq-btn"
+              onClick={() => handleScrollTo('faq')} 
+              className="text-brand-on-surface-variant hover:text-brand-primary transition-colors text-sm font-medium tracking-wide cursor-pointer"
+            >
+              FAQ
+            </button>
+            <button 
               id="nav-git-btn"
               onClick={() => { setCurrentTab('git'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
               className={`transition-colors text-sm font-medium tracking-wide cursor-pointer ${currentTab === 'git' ? 'text-brand-primary font-bold' : 'text-brand-on-surface-variant hover:text-brand-primary'}`}
@@ -401,6 +409,13 @@ export default function App() {
               className="text-left py-2 text-brand-on-surface hover:text-brand-primary text-base font-semibold border-b border-white/5"
             >
               Services
+            </button>
+            <button 
+              id="mob-nav-faq-btn"
+              onClick={() => handleScrollTo('faq')} 
+              className="text-left py-2 text-brand-on-surface hover:text-brand-primary text-base font-semibold border-b border-white/5"
+            >
+              FAQ
             </button>
             <button 
               id="mob-nav-git-btn"
@@ -943,7 +958,10 @@ export default function App() {
           </div>
         </section>
 
-            {/* Interactive Contact & Inquiries Panel */}
+        {/* FAQ Accordion Section */}
+        <FAQSection faqData={FAQ_DATA} onOpenEnquiry={openEnquiry} />
+
+        {/* Interactive Contact & Inquiries Panel */}
             <motion.section 
               id="contact" 
               initial={{ opacity: 0, y: 30 }}

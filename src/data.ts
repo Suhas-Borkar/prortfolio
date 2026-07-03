@@ -1,4 +1,4 @@
-import { Project, Skill, Experience, Solution } from './types';
+import { Project, Skill, Experience, Solution, FAQItem } from './types';
 
 export const HERO_DATA = {
   name: "Suhas Borkar",
@@ -182,3 +182,31 @@ export const SOLUTIONS_DATA: Solution[] = [
     tags: ["Framer", "Aesthetics", "A11y"]
   }
 ];
+
+export const FAQ_DATA: FAQItem[] = [
+  {
+    question: "What development services do you offer?",
+    answer: "I provide comprehensive full-stack development, including bespoke CRM & LMS ecosystems, customized enterprise portals, responsive frontends (React, Next.js, Angular), secure REST/GraphQL APIs (Node.js, PHP), and cloud deployments (AWS, Docker, Firebase) designed for high performance and scales."
+  },
+  {
+    question: "What is your typical collaboration and workflow process?",
+    answer: "My workflow is built on transparency and speed: first, we do a thorough requirement-gathering session; second, we create a clear milestone map; third, I build with weekly progress demos; fourth, we run a sandboxed sandbox test phase; and fifth, we launch seamlessly with full documentation."
+  },
+  {
+    question: "Do you provide post-launch maintenance and support?",
+    answer: "Absolutely. I provide tailored maintenance packages covering regular security patch application, server scaling adjustments, database optimizations, visual modifications, and fast-response hotfixes to keep your application highly stable and secure 24/7."
+  },
+  {
+    question: "Can you work with existing codebases or do you only build from scratch?",
+    answer: "I work with both. I can audit, optimize, and refactor existing codebases (legacy PHP, Angular, or React systems) to improve load times and security, or architect completely brand-new custom software products from the ground up."
+  },
+  {
+    question: "How do you handle project communication and timelines?",
+    answer: "Communication is key to a successful partnership. I provide regular updates via email, Slack, or video consultations, adapting to your timezone. Each project is scoped into structured phases with specific delivery dates, guaranteeing on-time, high-quality results."
+  },
+  {
+    question: "What is your pricing model for custom applications?",
+    answer: "I offer highly competitive pricing structures tailored to your scope: fixed-price quotes for well-defined, milestone-based projects, and flexible hourly or monthly retainer arrangements for ongoing advisory, scaling, or product iteration."
+  }
+];
+

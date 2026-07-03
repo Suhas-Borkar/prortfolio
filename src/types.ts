@@ -49,3 +49,9 @@ export interface ContactMessage {
   timestamp: string;
   status: 'unread' | 'read' | 'replied';
 }
+
+export interface FAQItem {
+  question: string;
+  answer: string;
+}
+
