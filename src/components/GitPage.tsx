@@ -261,7 +261,7 @@ export default function GitPage() {
           <GitBranch size={14} className="animate-pulse" />
           <span>Interactive Version Control</span>
         </div>
-        <h1 className="text-4xl sm:text-5xl font-display font-bold text-white tracking-tight">
+        <h1 className="text-4xl sm:text-5xl font-display font-bold text-brand-on-surface tracking-tight">
           Git &amp; GitHub <span className="gradient-text">Engine</span>
         </h1>
         <p className="text-sm sm:text-base text-brand-on-surface-variant">
@@ -280,7 +280,7 @@ export default function GitPage() {
               <Github size={20} />
             </div>
             <div>
-              <h2 className="text-lg sm:text-xl font-display font-bold text-white">Live GitHub Profile Explorer</h2>
+              <h2 className="text-lg sm:text-xl font-display font-bold text-brand-on-surface">Live GitHub Profile Explorer</h2>
               <p className="text-xs text-brand-on-surface-variant/80">Query public accounts and pull active code repositories dynamically.</p>
             </div>
           </div>
@@ -334,7 +334,7 @@ export default function GitPage() {
                     className="w-20 h-20 rounded-2xl border-2 border-brand-primary/30 object-cover shadow-lg"
                   />
                   <div className="space-y-1.5">
-                    <h3 className="text-xl font-display font-bold text-white flex items-center gap-2 justify-center sm:justify-start">
+                    <h3 className="text-xl font-display font-bold text-brand-on-surface flex items-center gap-2 justify-center sm:justify-start">
                       {userProfile.name || userProfile.login}
                       <a href={userProfile.html_url} target="_blank" rel="noreferrer" className="text-brand-on-surface-variant hover:text-white transition-colors" title="View on GitHub">
                         <ExternalLink size={14} />
@@ -358,15 +358,15 @@ export default function GitPage() {
                 {/* Account details pills */}
                 <div className="grid grid-cols-3 gap-3 w-full lg:w-auto shrink-0">
                   <div className="bg-brand-surface-container/40 border border-white/5 p-4 rounded-xl text-center">
-                    <div className="text-xl sm:text-2xl font-display font-bold text-white">{userProfile.public_repos}</div>
+                    <div className="text-xl sm:text-2xl font-display font-bold text-brand-on-surface">{userProfile.public_repos}</div>
                     <div className="text-[10px] text-brand-on-surface-variant/80 uppercase font-bold tracking-wider">Repositories</div>
                   </div>
                   <div className="bg-brand-surface-container/40 border border-white/5 p-4 rounded-xl text-center">
-                    <div className="text-xl sm:text-2xl font-display font-bold text-white">{userProfile.followers}</div>
+                    <div className="text-xl sm:text-2xl font-display font-bold text-brand-on-surface">{userProfile.followers}</div>
                     <div className="text-[10px] text-brand-on-surface-variant/80 uppercase font-bold tracking-wider">Followers</div>
                   </div>
                   <div className="bg-brand-surface-container/40 border border-white/5 p-4 rounded-xl text-center">
-                    <div className="text-xl sm:text-2xl font-display font-bold text-white">{userProfile.following}</div>
+                    <div className="text-xl sm:text-2xl font-display font-bold text-brand-on-surface">{userProfile.following}</div>
                     <div className="text-[10px] text-brand-on-surface-variant/80 uppercase font-bold tracking-wider">Following</div>
                   </div>
                 </div>
@@ -389,7 +389,7 @@ export default function GitPage() {
                       >
                         <div>
                           <div className="flex items-center justify-between gap-2 mb-2">
-                            <span className="font-display font-bold text-sm text-white group-hover:text-brand-primary transition-colors truncate">
+                            <span className="font-display font-bold text-sm text-brand-on-surface group-hover:text-brand-primary transition-colors truncate">
                               {repo.name}
                             </span>
                             <a href={repo.html_url} target="_blank" rel="noreferrer" className="text-brand-on-surface-variant/60 hover:text-white shrink-0 transition-all">
@@ -432,7 +432,7 @@ export default function GitPage() {
             <GitBranch size={20} />
           </div>
           <div>
-            <h2 className="text-lg sm:text-xl font-display font-bold text-white">Interactive Git Playground &amp; Tree Visualizer</h2>
+            <h2 className="text-lg sm:text-xl font-display font-bold text-brand-on-surface">Interactive Git Playground &amp; Tree Visualizer</h2>
             <p className="text-xs text-brand-on-surface-variant/80">Experiment with tracking, staging, committing and pushing file changes to simulate a real-world pipeline.</p>
           </div>
         </div>
@@ -449,7 +449,7 @@ export default function GitPage() {
               {/* Step 1: Modify File */}
               <div className="p-3.5 bg-brand-surface-container/40 border border-white/5 rounded-xl space-y-2.5">
                 <div className="flex justify-between items-center text-xs">
-                  <span className="font-bold text-white">Step 1: Code Modifications</span>
+                  <span className="font-bold text-brand-on-surface">Step 1: Code Modifications</span>
                   <span className={`text-[10px] uppercase font-bold font-mono px-2 py-0.5 rounded ${gitStatus === 'untracked' ? 'bg-brand-error/20 text-brand-error' : 'bg-green-500/15 text-green-400'}`}>
                     {gitStatus === 'untracked' ? 'Unstaged changes' : 'No untracked work'}
                   </span>
@@ -469,7 +469,7 @@ export default function GitPage() {
               {/* Step 2: git add */}
               <div className="p-3.5 bg-brand-surface-container/40 border border-white/5 rounded-xl space-y-2.5">
                 <div className="flex justify-between items-center text-xs">
-                  <span className="font-bold text-white">Step 2: Stage changes</span>
+                  <span className="font-bold text-brand-on-surface">Step 2: Stage changes</span>
                   <span className={`text-[10px] uppercase font-bold font-mono px-2 py-0.5 rounded ${gitStatus === 'staged' ? 'bg-brand-primary/20 text-brand-primary' : 'bg-brand-on-surface-variant/15 text-brand-on-surface-variant'}`}>
                     {gitStatus === 'staged' ? 'Staged' : 'Not staged'}
                   </span>
@@ -487,7 +487,7 @@ export default function GitPage() {
               {/* Step 3: git commit */}
               <div className="p-3.5 bg-brand-surface-container/40 border border-white/5 rounded-xl space-y-3">
                 <div className="flex justify-between items-center text-xs">
-                  <span className="font-bold text-white">Step 3: Commit changes</span>
+                  <span className="font-bold text-brand-on-surface">Step 3: Commit changes</span>
                   <span className={`text-[10px] uppercase font-bold font-mono px-2 py-0.5 rounded ${gitStatus === 'committed' ? 'bg-green-500/15 text-green-400' : 'bg-brand-on-surface-variant/15 text-brand-on-surface-variant'}`}>
                     {gitStatus === 'committed' ? 'Committed' : 'Pending'}
                   </span>
@@ -516,7 +516,7 @@ export default function GitPage() {
               {/* Step 4: git push */}
               <div className="p-3.5 bg-brand-surface-container/40 border border-white/5 rounded-xl space-y-2.5">
                 <div className="flex justify-between items-center text-xs">
-                  <span className="font-bold text-white">Step 4: Push to Origin</span>
+                  <span className="font-bold text-brand-on-surface">Step 4: Push to Origin</span>
                   <span className={`text-[10px] uppercase font-bold font-mono px-2 py-0.5 rounded ${gitStatus === 'pushed' ? 'bg-green-500/15 text-green-400' : 'bg-brand-on-surface-variant/15 text-brand-on-surface-variant'}`}>
                     {gitStatus === 'pushed' ? 'Remote synced' : 'Not pushed'}
                   </span>
@@ -583,7 +583,7 @@ export default function GitPage() {
                     
                     <div className="flex items-start justify-between gap-4">
                       <div>
-                        <p className="text-xs font-mono font-bold text-white group-hover:text-brand-primary transition-colors">{commit.message}</p>
+                        <p className="text-xs font-mono font-bold text-brand-on-surface group-hover:text-brand-primary transition-colors">{commit.message}</p>
                         <span className="text-[10px] text-brand-on-surface-variant/60 font-mono">Branch: {commit.branch} • {commit.timestamp}</span>
                       </div>
                       <span className="text-[10px] font-mono text-brand-primary bg-brand-primary/10 border border-brand-primary/20 px-2 py-0.5 rounded shrink-0">

@@ -41,13 +41,6 @@ const LIVE_PROJECTS: ClientProject[] = [
     tech: ["Angular", "PHP", "CodeIgniter", "MySQL", "AWS EC2"]
   },
   { 
-    name: "cryptokrantiacademy.com", 
-    url: "https://cryptokrantiacademy.com", 
-    category: "EdTech & Learning", 
-    description: "Specialized financial cryptocurrency academy offering webinars and progress tracking.",
-    tech: ["Angular", "PHP", "PostgreSQL", "JWT Authentication"]
-  },
-  { 
     name: "vidyatirth.com", 
     url: "https://vidyatirth.com", 
     category: "EdTech & Learning", 
@@ -106,6 +99,20 @@ const LIVE_PROJECTS: ClientProject[] = [
   },
   // Business & Agency
   { 
+    name: "roundexa.com", 
+    url: "https://roundexa.com", 
+    category: "Business & Agency", 
+    description: "Premium digital transformation platform and corporate brand management engine.",
+    tech: ["Next.js", "FastAPI", "PostgreSQL", "Redis"]
+  },
+  { 
+    name: "assyndicate.com", 
+    url: "https://www.assyndicate.com/", 
+    category: "Business & Agency", 
+    description: "Premium enterprise syndicate portal, brand management systems, and business consulting suite.",
+    tech: ["Next.js", "Remote MySQL", "Tailwind CSS", "REST API"]
+  },
+  { 
     name: "digitizebrand.com", 
     url: "https://digitizebrand.com", 
     category: "Business & Agency", 
@@ -114,7 +121,7 @@ const LIVE_PROJECTS: ClientProject[] = [
   },
   { 
     name: "gnstechnologies.in", 
-    url: "https://gnstechnologies.in", 
+    url: "https://gnstechnologies.in/", 
     category: "Business & Agency", 
     description: "Professional IT services, corporate training & cloud infrastructure consultant landing page.",
     tech: ["Angular", "PHP", "MySQL", "Material UI"]
@@ -272,7 +279,7 @@ export default function ProjectsPage() {
                 placeholder="Search live domains or tech..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full bg-brand-bg/80 border border-white/10 rounded-xl py-2.5 pl-10 pr-4 text-sm text-white placeholder:text-brand-on-surface-variant/50 focus:outline-none focus:border-brand-primary/50 transition-colors"
+                className="w-full bg-brand-bg/80 border border-brand-outline-variant/30 dark:border-white/10 rounded-xl py-2.5 pl-10 pr-4 text-sm text-brand-on-surface placeholder:text-brand-on-surface-variant/50 focus:outline-none focus:border-brand-primary/50 transition-colors"
               />
             </div>
 
@@ -321,7 +328,7 @@ export default function ProjectsPage() {
                             {getCategoryIcon(project.category)}
                             {project.category}
                           </span>
-                          <h3 className="font-semibold text-sm sm:text-base text-white group-hover:text-brand-primary transition-colors mt-1 flex items-center gap-1.5">
+                          <h3 className="font-semibold text-sm sm:text-base text-brand-on-surface group-hover:text-brand-primary transition-colors mt-1 flex items-center gap-1.5">
                             {project.name}
                             <ArrowRight size={14} className={`opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all ${isSelected ? 'opacity-100 translate-x-0 text-brand-primary' : ''}`} />
                           </h3>
@@ -361,6 +368,26 @@ export default function ProjectsPage() {
               )}
             </AnimatePresence>
           </div>
+
+          {/* Sidebar CTA Card */}
+          <div className="glass-card p-5 rounded-2xl border border-white/5 bg-gradient-to-br from-brand-primary-container/5 via-transparent to-brand-tertiary/5 space-y-4">
+            <div className="space-y-1">
+              <span className="text-[10px] font-mono font-bold text-brand-primary uppercase tracking-widest">WANT A CUSTOM PORTAL?</span>
+              <h4 className="font-display font-bold text-sm text-brand-on-surface">Let's Build Your Project</h4>
+              <p className="text-xs text-brand-on-surface-variant leading-relaxed">
+                Need a highly optimized portal or business application built for maximum scale? Let's consult.
+              </p>
+            </div>
+            <button
+              onClick={() => {
+                const event = new CustomEvent('suhas_open_enquiry', { detail: { subject: `Custom Portal Development inquiry` } });
+                window.dispatchEvent(event);
+              }}
+              className="w-full py-2.5 bg-brand-primary/10 border border-brand-primary/20 hover:bg-brand-primary/20 text-brand-primary hover:text-brand-on-surface dark:hover:text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+            >
+              Start Instant Enquiry
+            </button>
+          </div>
         </div>
 
         {/* RIGHT COLUMN: Interactive Web Frame Sandbox (Span 8) */}
@@ -368,76 +395,49 @@ export default function ProjectsPage() {
           <div className="glass-card rounded-2xl overflow-hidden border border-white/5 flex flex-col relative">
             
             {/* Address Bar Controls */}
-            <div className="bg-brand-surface-container-lowest/80 border-b border-white/5 px-4 py-3 flex flex-wrap items-center justify-between gap-4 z-10">
+            <div className="bg-brand-surface-container-lowest/80 border-b border-white/5 px-3 sm:px-4 py-2.5 sm:py-3 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4 z-10">
               
               {/* Traffic Lights & Selected Domain */}
-              <div className="flex items-center gap-3 flex-1 min-w-[200px]">
-                <div className="flex items-center gap-1.5">
-                  <span className="w-3 h-3 rounded-full bg-rose-500/80"></span>
-                  <span className="w-3 h-3 rounded-full bg-amber-500/80"></span>
-                  <span className="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+              <div className="flex items-center gap-3 flex-1 min-w-0">
+                <div className="flex items-center gap-1.5 shrink-0">
+                  <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
                 </div>
                 
                 {/* Simulated URL Input */}
-                <div className="flex-1 flex items-center justify-between gap-2 bg-brand-bg border border-white/10 rounded-lg px-3 py-1.5 text-xs text-brand-on-surface-variant font-mono">
-                  <div className="flex items-center gap-2 overflow-hidden truncate">
-                    <Globe size={12} className="text-brand-primary shrink-0" />
-                    <span className="text-white font-medium truncate select-all">{selectedProject.url}</span>
+                <div className="flex-1 flex items-center justify-between gap-2 bg-brand-bg border border-brand-outline-variant/30 dark:border-white/10 rounded-lg px-2.5 py-1.5 text-[11px] sm:text-xs text-brand-on-surface-variant font-mono overflow-hidden">
+                  <div className="flex items-center gap-1.5 overflow-hidden min-w-0">
+                    <Globe size={11} className="text-brand-primary shrink-0" />
+                    <span className="text-brand-on-surface font-medium truncate select-all">{selectedProject.url}</span>
                   </div>
                   
                   <div className="flex items-center gap-1 shrink-0">
                     <button 
                       onClick={handleCopy}
-                      className="p-1 hover:bg-white/10 rounded text-brand-on-surface-variant hover:text-white transition-colors"
+                      className="p-1 hover:bg-white/10 rounded text-brand-on-surface-variant hover:text-brand-on-surface dark:hover:text-white transition-colors"
                       title="Copy URL"
                     >
-                      {copied ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
+                      {copied ? <Check size={11} className="text-emerald-400" /> : <Copy size={11} />}
                     </button>
                     <button 
                       onClick={reloadIframe}
-                      className="p-1 hover:bg-white/10 rounded text-brand-on-surface-variant hover:text-white transition-all active:rotate-180"
+                      className="p-1 hover:bg-white/10 rounded text-brand-on-surface-variant hover:text-brand-on-surface dark:hover:text-white transition-all active:rotate-180"
                       title="Reload sandbox"
                     >
-                      <RefreshCw size={12} />
+                      <RefreshCw size={11} />
                     </button>
                   </div>
                 </div>
               </div>
 
-              {/* Viewport & External Actions */}
-              <div className="flex items-center gap-4 shrink-0">
-                
-                {/* Viewport Mode Switcher */}
-                <div className="flex items-center bg-brand-bg border border-white/10 rounded-lg p-0.5">
-                  <button
-                    onClick={() => setViewportMode('desktop')}
-                    className={`p-1.5 rounded ${viewportMode === 'desktop' ? 'bg-brand-primary text-white' : 'text-brand-on-surface-variant hover:text-white'}`}
-                    title="Desktop view"
-                  >
-                    <Laptop size={14} />
-                  </button>
-                  <button
-                    onClick={() => setViewportMode('tablet')}
-                    className={`p-1.5 rounded ${viewportMode === 'tablet' ? 'bg-brand-primary text-white' : 'text-brand-on-surface-variant hover:text-white'}`}
-                    title="Tablet view"
-                  >
-                    <Tablet size={14} />
-                  </button>
-                  <button
-                    onClick={() => setViewportMode('mobile')}
-                    className={`p-1.5 rounded ${viewportMode === 'mobile' ? 'bg-brand-primary text-white' : 'text-brand-on-surface-variant hover:text-white'}`}
-                    title="Mobile view"
-                  >
-                    <Smartphone size={14} />
-                  </button>
-                </div>
-
-                {/* External Action Button */}
+              {/* External Actions */}
+              <div className="flex items-center justify-end gap-3 shrink-0">
                 <a
                   href={selectedProject.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 bg-brand-primary hover:bg-brand-primary-container text-white text-xs font-bold px-3 py-2 rounded-lg transition-colors cursor-pointer"
+                  className="flex items-center justify-center gap-1.5 bg-brand-primary hover:bg-brand-primary-container text-white text-xs font-bold px-3 py-2 rounded-lg transition-colors cursor-pointer w-full sm:w-auto"
                 >
                   <span>Open Live Site</span>
                   <ExternalLink size={12} />
@@ -449,28 +449,17 @@ export default function ProjectsPage() {
             <div className="bg-brand-primary-container/5 border-b border-white/5 px-4 py-2.5 text-xs text-brand-on-surface-variant/80 flex items-center gap-2">
               <Info size={14} className="text-brand-primary shrink-0" />
               <p className="leading-tight">
-                Some cloud hosting providers block live embedding. If the sandbox below stays blank, click <a href={selectedProject.url} target="_blank" rel="noopener noreferrer" className="text-brand-primary font-semibold underline hover:text-white transition-colors">Open Live Site</a> to view it securely!
+                Some cloud hosting providers block live embedding. If the sandbox below stays blank, click <a href={selectedProject.url} target="_blank" rel="noopener noreferrer" className="text-brand-primary font-semibold underline hover:text-brand-on-surface dark:hover:text-white transition-colors">Open Live Site</a> to view it securely!
               </p>
             </div>
 
             {/* Simulated Workspace Viewport Container */}
-            <div className="bg-brand-bg/50 p-6 flex justify-center items-center overflow-auto min-h-[500px]">
+            <div className="bg-brand-bg/50 p-2 sm:p-6 flex justify-center items-center overflow-hidden min-h-[400px] sm:min-h-[500px]">
               
               <motion.div
                 layout
-                className={`relative shadow-2xl transition-all duration-300 ${
-                  viewportMode === 'desktop' ? 'w-full h-[580px]' : 
-                  viewportMode === 'tablet' ? 'w-[768px] h-[580px] border-x border-t border-white/10 rounded-t-2xl' : 
-                  'w-[380px] h-[580px] border-x border-t border-white/10 rounded-t-3xl'
-                }`}
+                className="relative shadow-2xl transition-all duration-300 w-full h-[400px] sm:h-[580px] rounded-2xl overflow-hidden border border-white/10"
               >
-                {/* Physical Frame Highlights (Bezels/Shadows for simulated device) */}
-                {viewportMode !== 'desktop' && (
-                  <div className="absolute top-0 left-0 right-0 h-4 bg-brand-surface-container-lowest border-b border-white/5 flex justify-center items-center rounded-t-xl z-20">
-                    <span className="w-12 h-1 bg-white/20 rounded-full"></span>
-                  </div>
-                )}
-
                 {/* Loading overlay */}
                 {iframeLoading && (
                   <div className="absolute inset-0 bg-brand-bg/95 flex flex-col justify-center items-center z-10 space-y-4">
@@ -479,7 +468,7 @@ export default function ProjectsPage() {
                       <Globe size={18} className="absolute text-brand-primary animate-pulse" />
                     </div>
                     <div className="text-center space-y-1">
-                      <p className="text-xs text-white font-mono">Routing to secure endpoint...</p>
+                      <p className="text-xs text-brand-on-surface font-mono">Routing to secure endpoint...</p>
                       <p className="text-[10px] text-brand-on-surface-variant/60">{selectedProject.name}</p>
                     </div>
                   </div>
@@ -489,7 +478,7 @@ export default function ProjectsPage() {
                 <iframe
                   ref={iframeRef}
                   src={selectedProject.url}
-                  className={`w-full h-full bg-white transition-all ${viewportMode !== 'desktop' ? 'pt-4 rounded-b-xl' : ''}`}
+                  className="w-full h-full bg-white transition-all"
                   onLoad={() => setIframeLoading(false)}
                   title={`Live Demo of ${selectedProject.name}`}
                   sandbox="allow-scripts allow-same-origin allow-forms"
@@ -501,7 +490,7 @@ export default function ProjectsPage() {
 
           {/* Quick Technical Summary Card */}
           <div className="glass-card p-5 rounded-2xl border border-white/5 space-y-3">
-            <h4 className="font-semibold text-sm text-white flex items-center gap-1.5">
+            <h4 className="font-semibold text-sm text-brand-on-surface flex items-center gap-1.5">
               <Sparkles size={14} className="text-brand-primary" />
               Technical Overview: {selectedProject.name}
             </h4>

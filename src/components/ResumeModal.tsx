@@ -16,7 +16,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
     <div id="resume-modal-overlay" className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md overflow-y-auto print:p-0 print:bg-white print:static">
       <div 
         id="resume-modal-container"
-        className="relative w-full max-w-4xl bg-brand-surface border border-white/10 rounded-2xl shadow-2xl overflow-hidden max-h-[95vh] flex flex-col print:border-0 print:rounded-none print:shadow-none print:max-h-none print:bg-white print:text-black"
+        className="relative w-full max-w-4xl bg-brand-surface border border-brand-outline-variant/30 dark:border-white/10 rounded-2xl shadow-2xl overflow-hidden max-h-[95vh] flex flex-col print:border-0 print:rounded-none print:shadow-none print:max-h-none print:bg-white print:text-black"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Controls (Hidden in print) */}
@@ -50,7 +50,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
           <div className="border-b border-white/10 pb-6 print:border-black/10">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
               <div>
-                <h1 className="text-3xl sm:text-4xl font-display font-bold text-white print:text-black">
+                <h1 className="text-3xl sm:text-4xl font-display font-bold text-brand-on-surface print:text-black">
                   Suhas Borkar
                 </h1>
                 <p className="text-brand-primary text-base sm:text-lg font-medium mt-1 print:text-blue-800">
@@ -104,7 +104,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
                 <div className="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-brand-primary print:bg-blue-800"></div>
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
                   <div>
-                    <h3 className="text-sm sm:text-base font-bold text-white print:text-black">
+                    <h3 className="text-sm sm:text-base font-bold text-brand-on-surface print:text-black">
                       Full Stack Developer
                     </h3>
                     <p className="text-xs sm:text-sm font-medium text-brand-secondary/95 print:text-gray-800">
@@ -162,7 +162,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
                 Education
               </h3>
               <div>
-                <h4 className="text-xs sm:text-sm font-bold text-white print:text-black">Bachelor of Commerce (B.Com)</h4>
+                <h4 className="text-xs sm:text-sm font-bold text-brand-on-surface print:text-black">Bachelor of Commerce (B.Com)</h4>
                 <p className="text-xs text-brand-on-surface-variant print:text-gray-700">Savitribai Phule Pune University • Graduated 2022 • CGPA 7.6 / 10</p>
               </div>
             </div>

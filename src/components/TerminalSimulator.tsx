@@ -129,7 +129,7 @@ export default function TerminalSimulator() {
   return (
     <div id="terminal-simulator" className="glass-card rounded-2xl overflow-hidden border border-white/10 shadow-2xl relative">
       {/* Tab Header bar */}
-      <div className="bg-[#0b0e15]/90 px-6 py-4 flex items-center justify-between border-b border-white/5">
+      <div className="bg-[#0b0e15]/90 px-4 sm:px-6 py-4 flex items-center justify-between border-b border-white/5">
         <div className="flex items-center gap-3">
           {/* Mock Buttons */}
           <div className="flex gap-2">
@@ -137,7 +137,7 @@ export default function TerminalSimulator() {
             <span className="w-3 h-3 rounded-full bg-brand-tertiary inline-block"></span>
             <span className="w-3 h-3 rounded-full bg-brand-primary inline-block"></span>
           </div>
-          <span className="text-xs font-mono text-brand-on-surface-variant/80 select-none ml-2">suhas-borkar-portfolio</span>
+          <span className="text-xs font-mono text-brand-on-surface-variant/80 select-none ml-2 hidden sm:inline-block">suhas-borkar-portfolio</span>
         </div>
 
         {/* Tab Selector */}
@@ -176,7 +176,7 @@ export default function TerminalSimulator() {
               {copied ? 'Copied' : 'Copy Block'}
             </button>
           </div>
-          <pre className="text-brand-primary leading-relaxed">
+          <pre className="text-brand-primary leading-relaxed whitespace-pre-wrap break-all sm:whitespace-pre">
             <span className="text-brand-tertiary">const</span> <span className="text-brand-primary">Developer</span> = {'{'}
             {"\n  "}name: <span className="text-brand-tertiary">"Suhas Borkar"</span>,
             {"\n  "}role: <span className="text-brand-tertiary">"Full Stack Developer"</span>,

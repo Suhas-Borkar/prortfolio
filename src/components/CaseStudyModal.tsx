@@ -13,7 +13,7 @@ export default function CaseStudyModal({ project, onClose }: CaseStudyModalProps
     <div id="case-study-overlay" className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto animate-fade-in">
       <div 
         id="case-study-container"
-        className="relative w-full max-w-4xl bg-brand-surface border border-white/15 rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto"
+        className="relative w-full max-w-4xl bg-brand-surface border border-brand-outline-variant/30 dark:border-white/15 rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header/Banner Image */}
@@ -61,14 +61,14 @@ export default function CaseStudyModal({ project, onClose }: CaseStudyModalProps
             </div>
             
             {/* Impact Metrics Panel */}
-            <div className="bg-brand-surface-container-low/60 border border-white/10 rounded-xl p-4 sm:p-5 space-y-4">
+            <div className="bg-brand-surface-container-low/60 border border-brand-outline-variant/20 dark:border-white/10 rounded-xl p-4 sm:p-5 space-y-4">
               <h4 className="text-xs font-display font-bold tracking-widest text-brand-tertiary uppercase flex items-center gap-1.5">
                 <TrendingUp size={14} /> High-Impact Stats
               </h4>
               <div className="space-y-3">
                 {project.stats.map((stat, idx) => (
                   <div key={idx} className="border-b border-white/5 pb-2 last:border-0 last:pb-0">
-                    <div className="text-xl sm:text-2xl font-display font-bold text-white">
+                    <div className="text-xl sm:text-2xl font-display font-bold text-brand-on-surface">
                       {stat.value}
                     </div>
                     <div className="text-xs text-brand-on-surface-variant/80">
@@ -141,7 +141,7 @@ export default function CaseStudyModal({ project, onClose }: CaseStudyModalProps
                   href={project.links.github} 
                   target="_blank" 
                   rel="noreferrer"
-                  className="flex items-center gap-1.5 px-4 py-2 bg-brand-surface-container hover:bg-brand-surface-container-high text-brand-on-surface text-sm font-semibold rounded-xl border border-white/10 transition-colors"
+                  className="flex items-center gap-1.5 px-4 py-2 bg-brand-surface-container hover:bg-brand-surface-container-high text-brand-on-surface text-sm font-semibold rounded-xl border border-brand-outline-variant/30 dark:border-white/10 transition-colors"
                 >
                   <Github size={16} /> Code Repository
                 </a>

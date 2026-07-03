@@ -41,28 +41,28 @@ export const PROJECTS_DATA: Project[] = [
     }
   },
   {
-    id: "cryptokranti-academy",
-    title: "CryptoKranti Academy",
-    description: "Dual-domain educational platform with automated webinar scheduling & payment gateways.",
-    longDescription: "A specialized financial educational portal that delivers live courses, webinars, and automated registration. Integrates robust transaction processing to manage premium webinar seats and course progress tracking.",
+    id: "roundexa",
+    title: "Roundexa",
+    description: "Premium digital transformation platform and corporate brand management engine.",
+    longDescription: "A sophisticated corporate brand showcase and customer acquisition engine engineered for high-growth enterprises. Features custom lead routing algorithms, interactive agency portfolios, and highly dynamic service matrices.",
     image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCgYdQswv8z71U7sflQCQhP3NNlrLTMBd3ED-cogVv7H2TFvfB1CbTtAJiVELVYI51D7ggBnqLz0Uo9BOyoDvDYLnDeAh0XCpMwpSzxrw5ojBebKO14zrvWPjsXdLMO0yaFdCQxtdPqBew_QoYOT_VYSO5uifaD_xA2PjIzex-DdyZFirx3eGyNG-Cj7lGcFkV6Ge25bdakgl54p_i41ua31wuYuAxOVfGJG-x8FFoRofWTlcG612hh_bdmLVZoDaLjoabKPF19zuE",
-    tags: ["Angular", "PHP", "PostgreSQL", "JWT", "REST API"],
-    category: "Web Application",
+    tags: ["Next.js", "FastAPI", "PostgreSQL", "Redis", "REST API"],
+    category: "Business & Agency",
     stats: [
-      { label: "Platform Model", value: "Dual-Domain" },
-      { label: "Database", value: "PostgreSQL" },
-      { label: "Security Status", value: "JWT-Secured" }
+      { label: "Platform Model", value: "SaaS & Showcase" },
+      { label: "Lead Response Time", value: "< 2 mins" },
+      { label: "Core Performance", value: "98% PageSpeed" }
     ],
     challenges: [
-      "Securing private, high-value webinar content from unauthorized scraping and session sharing.",
-      "Synchronizing payment status hooks back to the platform without dropping user sessions."
+      "Optimizing complex interactive layouts and image-heavy brand showcases for mobile search engine indices.",
+      "Handling real-time contact capturing and automated validation of client pipeline entries securely."
     ],
     solutions: [
-      "Engineered multi-layered JWT session authentication coupled with short-lived session security rules.",
-      "Built robust asynchronous webhook listeners with failover queues in PostgreSQL to handle payment completions securely."
+      "Engineered a fully semantic, micro-formatted HTML schema using Next.js client optimization and optimized asset pipeline delivery.",
+      "Implemented server-side sanitation filters in FastAPI and real-time validation via asynchronous REST APIs."
     ],
     links: {
-      live: "https://cryptokrantiacademy.com",
+      live: "https://roundexa.com",
       github: "https://github.com/Suhas-Borkar"
     }
   },

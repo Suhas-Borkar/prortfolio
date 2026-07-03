@@ -5,6 +5,8 @@ import { ContactMessage } from '../types';
 export default function ContactForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [location, setLocation] = useState('');
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
   
@@ -17,8 +19,7 @@ export default function ContactForm() {
   const [messages, setMessages] = useState<ContactMessage[]>([]);
   const [showInbox, setShowInbox] = useState(false);
 
-  // Load submissions from localStorage on mount
-  useEffect(() => {
+  const loadMessages = () => {
     try {
       const stored = localStorage.getItem('suhas_portfolio_inquiries');
       if (stored) {
@@ -40,6 +41,20 @@ export default function ContactForm() {
     } catch (e) {
       console.error("Local storage access failed", e);
     }
+  };
+
+  // Load submissions from localStorage on mount and listen for custom update event
+  useEffect(() => {
+    loadMessages();
+
+    const handleUpdate = () => {
+      loadMessages();
+    };
+
+    window.addEventListener('suhas_inquiries_updated', handleUpdate);
+    return () => {
+      window.removeEventListener('suhas_inquiries_updated', handleUpdate);
+    };
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -66,6 +81,8 @@ export default function ContactForm() {
         id: Math.random().toString(36).substring(2, 9),
         name,
         email,
+        phone,
+        location,
         subject,
         message,
         timestamp: new Date().toLocaleString(),
@@ -86,6 +103,8 @@ export default function ContactForm() {
       // Clear inputs
       setName('');
       setEmail('');
+      setPhone('');
+      setLocation('');
       setSubject('');
       setMessage('');
     }, 1200);
@@ -127,7 +146,7 @@ export default function ContactForm() {
             </div>
             <div>
               <div className="text-xs font-display font-bold text-brand-on-surface-variant/70 uppercase tracking-widest">Email Me</div>
-              <a href="mailto:suhasborkar80@gmail.com" className="font-bold text-white hover:text-brand-primary transition-colors">
+              <a href="mailto:suhasborkar80@gmail.com" className="font-bold text-brand-on-surface hover:text-brand-primary transition-colors">
                 suhasborkar80@gmail.com
               </a>
             </div>
@@ -140,7 +159,7 @@ export default function ContactForm() {
             </div>
             <div>
               <div className="text-xs font-display font-bold text-brand-on-surface-variant/70 uppercase tracking-widest">Call Me</div>
-              <a href="tel:+918698095892" className="font-bold text-white hover:text-brand-primary transition-colors">
+              <a href="tel:+918698095892" className="font-bold text-brand-on-surface hover:text-brand-primary transition-colors">
                 +91 8698095892
               </a>
             </div>
@@ -153,7 +172,7 @@ export default function ContactForm() {
             </div>
             <div>
               <div className="text-xs font-display font-bold text-brand-on-surface-variant/70 uppercase tracking-widest">Location</div>
-              <div className="font-bold text-white">
+              <div className="font-bold text-brand-on-surface">
                 India (GMT +5:30)
               </div>
             </div>
@@ -177,9 +196,9 @@ export default function ContactForm() {
       <div className="space-y-6">
         {showInbox ? (
           /* Submissions Manager (Inbox Panel) */
-          <div id="submissions-inbox" className="glass-card p-6 sm:p-8 rounded-2xl border border-white/10 space-y-4">
-            <div className="flex items-center justify-between border-b border-white/10 pb-3">
-              <h3 className="font-display font-bold text-white flex items-center gap-2">
+          <div id="submissions-inbox" className="glass-card p-6 sm:p-8 rounded-2xl border border-brand-outline-variant/30 dark:border-white/10 space-y-4">
+            <div className="flex items-center justify-between border-b border-brand-outline-variant/20 dark:border-white/10 pb-3">
+              <h3 className="font-display font-bold text-brand-on-surface flex items-center gap-2">
                 <Inbox size={18} className="text-brand-primary" /> Submitted Inquiries (Local)
               </h3>
               <button 
@@ -204,14 +223,24 @@ export default function ContactForm() {
                   >
                     <div className="flex items-start justify-between gap-2 mb-2">
                       <div>
-                        <span className="font-bold text-white">{msg.name}</span>
+                        <span className="font-bold text-brand-on-surface">{msg.name}</span>
                         <span className="text-brand-on-surface-variant/70 block">{msg.email}</span>
+                        {msg.phone && (
+                          <span className="text-brand-secondary/80 block font-mono text-[11px] mt-0.5">
+                            Tel: {msg.phone}
+                          </span>
+                        )}
+                        {msg.location && (
+                          <span className="text-brand-tertiary/80 block font-mono text-[11px] mt-0.5">
+                            Loc: {msg.location}
+                          </span>
+                        )}
                       </div>
                       <span className="text-[10px] text-brand-on-surface-variant/50 font-mono">{msg.timestamp}</span>
                     </div>
                     <div className="mb-1">
                       <span className="font-semibold text-brand-tertiary">Subj: </span>
-                      <span className="text-white">{msg.subject}</span>
+                      <span className="text-brand-on-surface">{msg.subject}</span>
                     </div>
                     <p className="text-brand-on-surface-variant leading-relaxed mb-3 bg-black/20 p-2.5 rounded border border-white/5 font-mono text-xs">
                       {msg.message}
@@ -241,7 +270,7 @@ export default function ContactForm() {
           </div>
         ) : (
           /* Actual Contact Form */
-          <div className="glass-card p-6 sm:p-8 rounded-2xl border border-white/10 relative overflow-hidden">
+          <div className="glass-card p-6 sm:p-8 rounded-2xl border border-brand-outline-variant/30 dark:border-white/10 relative overflow-hidden">
             {/* Visual background glows */}
             <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/10 rounded-full blur-3xl pointer-events-none"></div>
 
@@ -287,6 +316,31 @@ export default function ContactForm() {
                     className="w-full bg-brand-bg/80 border border-white/10 rounded-xl focus:border-brand-primary focus:ring-1 focus:ring-brand-primary text-brand-on-surface px-4 py-3 text-sm transition-all"
                     placeholder="john@company.com"
                     required
+                  />
+                </div>
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label htmlFor="form-phone" className="text-xs font-display font-bold uppercase tracking-widest text-brand-on-surface-variant/80">Phone Number</label>
+                  <input 
+                    id="form-phone"
+                    type="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    className="w-full bg-brand-bg/80 border border-white/10 rounded-xl focus:border-brand-primary focus:ring-1 focus:ring-brand-primary text-brand-on-surface px-4 py-3 text-sm transition-all"
+                    placeholder="+91 99999 99999"
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <label htmlFor="form-location" className="text-xs font-display font-bold uppercase tracking-widest text-brand-on-surface-variant/80">Location / City</label>
+                  <input 
+                    id="form-location"
+                    type="text"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    className="w-full bg-brand-bg/80 border border-white/10 rounded-xl focus:border-brand-primary focus:ring-1 focus:ring-brand-primary text-brand-on-surface px-4 py-3 text-sm transition-all"
+                    placeholder="e.g., Pune, India"
                   />
                 </div>
               </div>

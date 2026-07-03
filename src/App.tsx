@@ -29,7 +29,10 @@ import {
   Mail, 
   MapPin,
   Flame,
-  Award
+  Award,
+  Sun,
+  Moon,
+  FolderOpen
 } from 'lucide-react';
 
 import { HERO_DATA, PROJECTS_DATA, SKILLS_DATA, EXPERIENCE_DATA, SOLUTIONS_DATA } from './data';
@@ -40,16 +43,84 @@ import ResumeModal from './components/ResumeModal';
 import ContactForm from './components/ContactForm';
 import GitPage from './components/GitPage';
 import ProjectsPage from './components/ProjectsPage';
+import EnquiryModal from './components/EnquiryModal';
 
 export default function App() {
   // Mobile navigation drawer
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
+  // Theme state switcher: toggles between dark and high-contrast light
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+    try {
+      const saved = localStorage.getItem('suhas_portfolio_theme');
+      return (saved === 'light') ? 'light' : 'dark';
+    } catch {
+      return 'dark';
+    }
+  });
+
+  // Animated progress bar state
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  // Sync theme with document class list
+  useEffect(() => {
+    try {
+      if (theme === 'light') {
+        document.documentElement.classList.add('light');
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('suhas_portfolio_theme', 'light');
+      } else {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+        localStorage.setItem('suhas_portfolio_theme', 'dark');
+      }
+    } catch (e) {
+      console.error("Failed to sync theme", e);
+    }
+  }, [theme]);
+
+  // Track window scroll down for progress bar
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalScroll > 0) {
+        const progress = (window.scrollY / totalScroll) * 100;
+        setScrollProgress(progress);
+      } else {
+        setScrollProgress(0);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   
   // Selected project for Case Study modal
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   
   // Resume modal state
   const [resumeOpen, setResumeOpen] = useState(false);
+
+  // Enquiry modal state
+  const [enquiryOpen, setEnquiryOpen] = useState(false);
+  const [enquirySubject, setEnquirySubject] = useState('General Project Inquiry');
+
+  const openEnquiry = (subject: string) => {
+    setEnquirySubject(subject);
+    setEnquiryOpen(true);
+  };
+
+  useEffect(() => {
+    const handleOpenEnquiryEvent = (e: Event) => {
+      const customEvent = e as CustomEvent<{ subject?: string }>;
+      const subject = customEvent.detail?.subject || 'General Project Inquiry';
+      openEnquiry(subject);
+    };
+    window.addEventListener('suhas_open_enquiry', handleOpenEnquiryEvent);
+    return () => {
+      window.removeEventListener('suhas_open_enquiry', handleOpenEnquiryEvent);
+    };
+  }, []);
 
   // Selected tab/page ('portfolio' | 'git' | 'projects')
   const [currentTab, setCurrentTab] = useState<'portfolio' | 'git' | 'projects'>('portfolio');
@@ -90,7 +161,7 @@ export default function App() {
     const animate = () => {
       ctx.clearRect(0, 0, width, height);
 
-      orbs.forEach((orb) => {
+      orbs.forEach((orb, index) => {
         // Update positions
         orb.x += orb.dx;
         orb.y += orb.dy;
@@ -99,10 +170,19 @@ export default function App() {
         if (orb.x - orb.radius < 0 || orb.x + orb.radius > width) orb.dx *= -1;
         if (orb.y - orb.radius < 0 || orb.y + orb.radius > height) orb.dy *= -1;
 
+        // Determine particle colors based on light mode vs dark mode dynamically
+        const isLight = document.documentElement.classList.contains('light');
+        let color = orb.color;
+        if (isLight) {
+          if (index === 0) color = 'rgba(30, 64, 175, 0.04)'; // Soft deep blue
+          else if (index === 1) color = 'rgba(109, 40, 217, 0.04)'; // Soft violet
+          else color = 'rgba(6, 182, 212, 0.03)'; // Soft cyan
+        }
+
         // Draw radial gradient
         const gradient = ctx.createRadialGradient(orb.x, orb.y, 0, orb.x, orb.y, orb.radius);
-        gradient.addColorStop(0, orb.color);
-        gradient.addColorStop(1, 'rgba(3, 7, 18, 0)');
+        gradient.addColorStop(0, color);
+        gradient.addColorStop(1, isLight ? 'rgba(248, 250, 252, 0)' : 'rgba(3, 7, 18, 0)');
 
         ctx.fillStyle = gradient;
         ctx.beginPath();
@@ -172,6 +252,15 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen text-brand-on-surface selection:bg-brand-primary/30 selection:text-white">
+      {/* Slim Scroll Progress Bar */}
+      <div className="fixed top-0 left-0 w-full h-[3px] z-50 bg-white/5 overflow-hidden">
+        <div 
+          id="scroll-progress-indicator"
+          className="h-full bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-tertiary transition-all duration-100"
+          style={{ width: `${scrollProgress}%` }}
+        />
+      </div>
+
       {/* Dynamic Background Canvas */}
       <canvas 
         ref={canvasRef} 
@@ -190,7 +279,7 @@ export default function App() {
           <button 
             id="nav-logo"
             onClick={() => handleScrollTo('hero')}
-            className="font-display text-2xl font-bold tracking-tighter text-brand-primary hover:text-white transition-colors cursor-pointer"
+            className="font-display text-2xl font-bold tracking-tighter text-brand-primary hover:text-brand-on-surface dark:hover:text-white transition-colors cursor-pointer"
           >
             SB
           </button>
@@ -247,14 +336,34 @@ export default function App() {
             >
               Let's Talk
             </button>
+
+            {/* Theme Toggle Button */}
+            <button 
+              id="theme-toggle-desktop-btn"
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              className="p-2.5 rounded-full bg-brand-surface border border-brand-outline-variant/30 dark:border-white/10 text-brand-on-surface hover:text-brand-primary hover:border-brand-primary/30 transition-all shadow-md flex items-center justify-center cursor-pointer hover:scale-105 active:scale-95 shrink-0"
+              title={`Switch to ${theme === 'dark' ? 'High-Contrast Light' : 'Dark'} Mode`}
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
+            </button>
           </div>
 
-          {/* Mobile menu trigger */}
-          <div className="md:hidden">
+          {/* Mobile navigation controls */}
+          <div className="md:hidden flex items-center gap-3">
+            {/* Theme Toggle Button */}
+            <button 
+              id="theme-toggle-mobile-top-btn"
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              className="p-2.5 rounded-full bg-brand-surface border border-white/5 text-brand-on-surface hover:text-brand-primary transition-all flex items-center justify-center cursor-pointer"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
             <button 
               id="mobile-menu-toggle-btn"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-brand-primary hover:text-white transition-colors"
+              className="p-2 text-brand-primary hover:text-brand-on-surface dark:hover:text-white transition-colors"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -314,6 +423,28 @@ export default function App() {
             >
               Let's Talk
             </button>
+
+            <div className="pt-4 mt-2 border-t border-brand-outline-variant/20 dark:border-white/10 flex items-center justify-between">
+              <span className="text-sm font-medium text-brand-on-surface-variant">Theme Mode</span>
+              <button
+                id="theme-toggle-mobile-drawer-btn"
+                onClick={() => {
+                  setTheme(theme === 'dark' ? 'light' : 'dark');
+                  setMobileMenuOpen(false);
+                }}
+                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-brand-surface border border-brand-outline-variant/30 dark:border-white/10 text-brand-on-surface text-xs font-semibold cursor-pointer"
+              >
+                {theme === 'dark' ? (
+                  <>
+                    <Sun size={14} className="text-amber-400" /> High-Contrast Light
+                  </>
+                ) : (
+                  <>
+                    <Moon size={14} className="text-indigo-400" /> Dark Mode
+                  </>
+                )}
+              </button>
+            </div>
           </div>
         )}
       </nav>
@@ -374,7 +505,7 @@ export default function App() {
 
               {/* Headings */}
               <div className="space-y-2">
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight leading-none text-white">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight leading-none text-brand-on-surface">
                   Hi, I'm <span className="gradient-text">{HERO_DATA.name}</span>
                 </h1>
                 <h2 className="text-xl sm:text-2xl lg:text-3xl font-display font-semibold text-brand-on-surface-variant">
@@ -387,8 +518,15 @@ export default function App() {
                 {HERO_DATA.description}
               </p>
 
-              {/* Buttons panel */}
+               {/* Buttons panel */}
               <div className="flex flex-wrap gap-4 pt-2">
+                <button 
+                  id="hero-enquiry-btn"
+                  onClick={() => openEnquiry('New Project Consultation')}
+                  className="bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-tertiary px-8 py-3.5 rounded-xl text-white font-bold text-xs sm:text-sm shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer flex items-center gap-2 border border-white/10"
+                >
+                  <Mail size={16} className="text-white shrink-0" /> Start Enquiry
+                </button>
                 <button 
                   id="hero-view-projects-btn"
                   onClick={() => handleScrollTo('work')}
@@ -452,7 +590,7 @@ export default function App() {
             transition={{ duration: 0.6 }}
             className="text-center max-w-3xl mx-auto mb-12 space-y-4"
           >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-white tracking-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-brand-on-surface tracking-tight">
               Technical <span className="gradient-text">Arsenal</span>
             </h2>
             <p className="text-sm sm:text-base text-brand-on-surface-variant">
@@ -488,13 +626,13 @@ export default function App() {
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.3, delay: Math.min(idx * 0.05, 0.4) }}
                 key={skill.name} 
-                className="glass-card p-5 rounded-2xl border border-white/5 hover:border-brand-primary/30 flex flex-col justify-between group"
+                className="glass-card p-5 rounded-2xl border border-brand-outline-variant/10 dark:border-white/5 hover:border-brand-primary/30 flex flex-col justify-between group"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-8 h-8 rounded-lg bg-brand-surface-container flex items-center justify-center text-brand-primary group-hover:bg-brand-primary/10 group-hover:text-brand-tertiary transition-all">
                     {getSkillIcon(skill.icon)}
                   </div>
-                  <span className="font-display font-bold text-sm sm:text-base text-white">{skill.name}</span>
+                  <span className="font-display font-bold text-sm sm:text-base text-brand-on-surface">{skill.name}</span>
                 </div>
 
                 {/* Progress Visual Level indicator */}
@@ -522,7 +660,7 @@ export default function App() {
               <div className="w-10 h-10 rounded-xl bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center text-brand-primary">
                 <Award size={20} />
               </div>
-              <h2 className="text-3xl sm:text-4xl font-display font-bold text-white tracking-tight">
+              <h2 className="text-3xl sm:text-4xl font-display font-bold text-brand-on-surface tracking-tight">
                 Professional <span className="gradient-text">Journey</span>
               </h2>
             </div>
@@ -541,10 +679,10 @@ export default function App() {
                   <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-brand-bg border-4 border-brand-primary ring-4 ring-brand-primary/10 group-hover:scale-125 group-hover:border-brand-tertiary transition-all duration-300"></div>
                   
                   {/* Experience Card */}
-                  <div className="glass-card p-6 sm:p-8 rounded-2xl border border-white/5 hover:border-white/10 space-y-4">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/5 pb-4">
+                  <div className="glass-card p-6 sm:p-8 rounded-2xl border border-brand-outline-variant/10 dark:border-white/5 hover:border-white/10 space-y-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-brand-outline-variant/10 dark:border-white/5 pb-4">
                       <div>
-                        <h3 className="text-lg sm:text-xl font-display font-bold text-white group-hover:text-brand-primary transition-colors">
+                        <h3 className="text-lg sm:text-xl font-display font-bold text-brand-on-surface group-hover:text-brand-primary transition-colors">
                           {exp.role}
                         </h3>
                         <p className="text-sm font-medium text-brand-secondary">
@@ -587,7 +725,7 @@ export default function App() {
             transition={{ duration: 0.6 }}
             className="text-center max-w-3xl mx-auto mb-14 space-y-4"
           >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-white tracking-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-brand-on-surface tracking-tight">
               Featured <span className="gradient-text">Creations</span>
             </h2>
             <p className="text-sm sm:text-base text-brand-on-surface-variant">
@@ -595,64 +733,100 @@ export default function App() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {PROJECTS_DATA.map((project, idx) => (
-              <motion.div 
-                key={project.id} 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
-                className="glass-card rounded-2xl overflow-hidden group border border-white/5 flex flex-col justify-between"
+          {PROJECTS_DATA.length === 0 ? (
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="glass-card max-w-lg mx-auto p-8 sm:p-10 rounded-2xl border border-brand-outline-variant/30 dark:border-white/10 text-center space-y-6 flex flex-col items-center justify-center shadow-xl relative overflow-hidden"
+            >
+              {/* Visual background glow */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+              
+              <div className="w-16 h-16 rounded-2xl bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center text-brand-primary relative shadow-inner">
+                <FolderOpen size={30} className="stroke-[1.5]" />
+                <span className="absolute -top-1 -right-1 flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-tertiary opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-brand-tertiary"></span>
+                </span>
+              </div>
+              
+              <div className="space-y-2">
+                <h3 className="text-xl font-display font-bold text-brand-on-surface">No Projects Available</h3>
+                <p className="text-xs sm:text-sm text-brand-on-surface-variant/90 leading-relaxed">
+                  There are currently no featured creations listed in this showcase. Start an instant enquiry or check out our interactive portal for more tools.
+                </p>
+              </div>
+
+              <button
+                id="empty-state-enquiry-btn"
+                onClick={() => openEnquiry("Custom Project Consultation")}
+                className="px-5 py-2.5 bg-brand-primary hover:bg-brand-primary/90 text-white text-xs font-bold rounded-xl shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer flex items-center gap-1.5"
               >
-                <div>
-                  {/* Image wrapper */}
-                  <div className="relative h-56 sm:h-60 overflow-hidden">
-                    <img 
-                      src={project.image} 
-                      alt={project.title} 
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      referrerPolicy="no-referrer"
-                    />
-                    {/* Dark gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-brand-bg via-transparent to-transparent opacity-80" />
-                  </div>
-
-                  {/* Metadata & Description */}
-                  <div className="p-6 space-y-3">
-                    <div className="flex flex-wrap gap-2 mb-2">
-                      {project.tags.slice(0, 2).map((tag, tIdx) => (
-                        <span 
-                          key={tIdx} 
-                          className="text-[10px] uppercase font-bold tracking-widest bg-brand-primary/10 border border-brand-primary/15 text-brand-primary px-2.5 py-1 rounded"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+                Start Consultation <ArrowRight size={14} />
+              </button>
+            </motion.div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {PROJECTS_DATA.map((project, idx) => (
+                <motion.div 
+                  key={project.id} 
+                  initial={{ opacity: 0, y: 25 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.55, ease: "easeOut", delay: idx * 0.1 }}
+                  className="glass-card rounded-2xl overflow-hidden group border border-brand-outline-variant/10 dark:border-white/5 flex flex-col justify-between"
+                >
+                  <div>
+                    {/* Image wrapper */}
+                    <div className="relative h-56 sm:h-60 overflow-hidden">
+                      <img 
+                        src={project.image} 
+                        alt={project.title} 
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        referrerPolicy="no-referrer"
+                      />
+                      {/* Dark gradient overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-brand-bg via-transparent to-transparent opacity-80" />
                     </div>
-                    <h3 className="text-lg sm:text-xl font-display font-bold text-white group-hover:text-brand-primary transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-brand-on-surface-variant/90 leading-relaxed line-clamp-3">
-                      {project.description}
-                    </p>
-                  </div>
-                </div>
 
-                {/* Case Study Actions trigger */}
-                <div className="px-6 pb-6 pt-2">
-                  <button 
-                    id={`view-case-study-${project.id}`}
-                    onClick={() => setSelectedProject(project)}
-                    className="text-brand-primary font-bold text-xs sm:text-sm flex items-center gap-1.5 hover:text-white transition-colors cursor-pointer group/link"
-                  >
-                    View Case Study 
-                    <ArrowRight size={14} className="group-hover/link:translate-x-1.5 transition-transform" />
-                  </button>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                    {/* Metadata & Description */}
+                    <div className="p-6 space-y-3">
+                      <div className="flex flex-wrap gap-2 mb-2">
+                        {project.tags.slice(0, 2).map((tag, tIdx) => (
+                          <span 
+                            key={tIdx} 
+                            className="text-[10px] uppercase font-bold tracking-widest bg-brand-primary/10 border border-brand-primary/15 text-brand-primary px-2.5 py-1 rounded"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <h3 className="text-lg sm:text-xl font-display font-bold text-brand-on-surface group-hover:text-brand-primary transition-colors">
+                        {project.title}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-brand-on-surface-variant/90 leading-relaxed line-clamp-3">
+                        {project.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Case Study Actions trigger */}
+                  <div className="px-6 pb-6 pt-2">
+                    <button 
+                      id={`view-case-study-${project.id}`}
+                      onClick={() => setSelectedProject(project)}
+                      className="text-brand-primary font-bold text-xs sm:text-sm flex items-center gap-1.5 hover:text-brand-on-surface dark:hover:text-white transition-colors cursor-pointer group/link"
+                    >
+                      View Case Study 
+                      <ArrowRight size={14} className="group-hover/link:translate-x-1.5 transition-transform" />
+                    </button>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          )}
         </section>
 
         {/* Comprehensive Solutions Section */}
@@ -664,7 +838,7 @@ export default function App() {
             transition={{ duration: 0.6 }}
             className="text-center max-w-3xl mx-auto mb-14 space-y-4"
           >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-white tracking-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-brand-on-surface tracking-tight">
               Comprehensive <span className="gradient-text">Solutions</span>
             </h2>
             <p className="text-sm sm:text-base text-brand-on-surface-variant">
@@ -688,7 +862,7 @@ export default function App() {
                     {getSolutionIcon(solution.iconName)}
                   </div>
 
-                  <h3 className="text-lg sm:text-xl font-display font-bold text-white group-hover:text-brand-primary transition-colors">
+                  <h3 className="text-lg sm:text-xl font-display font-bold text-brand-on-surface group-hover:text-brand-primary transition-colors">
                     {solution.title}
                   </h3>
 
@@ -708,6 +882,31 @@ export default function App() {
               </motion.div>
             ))}
           </div>
+
+          {/* Custom CTA Banner inside Services */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            className="mt-16 p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-brand-surface-container-low/50 via-brand-surface/40 to-brand-primary/5 border border-white/10 flex flex-col md:flex-row justify-between items-center gap-8 relative overflow-hidden"
+          >
+            <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/5 rounded-full blur-[80px] pointer-events-none -z-10" />
+            <div className="space-y-3 max-w-2xl text-center md:text-left">
+              <h3 className="text-xl sm:text-2xl font-display font-extrabold text-brand-on-surface">
+                🚀 Need a Customized Solution?
+              </h3>
+              <p className="text-sm text-brand-on-surface-variant leading-relaxed">
+                Let's architect and build something extraordinary for your business. Start an instant project consultation now.
+              </p>
+            </div>
+            <button 
+              id="services-cta-enquiry-btn"
+              onClick={() => openEnquiry('Custom Consulting Enquiry')}
+              className="px-8 py-3.5 bg-gradient-to-r from-brand-primary to-brand-secondary hover:from-brand-primary/90 hover:to-brand-secondary/90 text-white rounded-xl font-bold text-sm tracking-wide shadow-lg hover:scale-105 active:scale-95 transition-all shrink-0 cursor-pointer"
+            >
+              Consult Suhas
+            </button>
+          </motion.div>
         </section>
 
         {/* Tech Stack Infinite scrolling Banner */}
@@ -807,7 +1006,7 @@ export default function App() {
             <button 
               id="footer-resume-btn"
               onClick={() => setResumeOpen(true)}
-              className="text-brand-primary hover:text-white transition-colors flex items-center gap-1.5 text-xs font-bold"
+              className="text-brand-primary hover:text-brand-on-surface dark:hover:text-white transition-colors flex items-center gap-1.5 text-xs font-bold"
             >
               <FileText size={14} /> View CV
             </button>
@@ -825,6 +1024,12 @@ export default function App() {
       <ResumeModal 
         isOpen={resumeOpen} 
         onClose={() => setResumeOpen(false)} 
+      />
+
+      <EnquiryModal 
+        isOpen={enquiryOpen} 
+        onClose={() => setEnquiryOpen(false)} 
+        initialSubject={enquirySubject}
       />
 
     </div>
